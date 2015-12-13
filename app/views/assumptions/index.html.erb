@@ -1,0 +1,35 @@
+<div>
+  <div class = "row">
+
+  <div class = "well col-md-4">
+    <h4>User info</h4>
+    <p>First Name: <%= current_user.first_name %> </p>
+    <p>Last Name: <%= current_user.last_name %> </p>
+    <p>Email: <%= current_user.email %> </p>
+
+  </div>  
+  <div class = "well col-md-4">
+    <h4>Mortgage Assumptions</h4>
+    <p>Percent Down Payment: <%= current_user.percent_down_pmt %>% </p>
+    <p>Credit: <%= current_user.credit_score_bucket %> </p>
+    <p>Loan Type: <%= current_user.loan_type %> </p>
+
+  </div>  
+
+  <div class = "well col-md-4">
+    <h4>Rent vs. Buy Assumptions</h4>
+    <p>Acquisition Costs: <%= current_user.acquisition_costs %>% </p>
+    <p>Disposition Costs: <%= current_user.disposition_costs %>% </p>
+    <p>Annual Maintenance: <%= current_user.annual_maintenance %> </p>
+    <p>Annual Insurance: <%= current_user.annual_insurance %> </p>
+    <p>Current rent: Add this once migrated </p>
+    <p>Rent growth: <%= current_user.rent_growth %> </p>
+    <p>Property Appreciation: <%= current_user.property_appreciation %> </p>
+    <p>Income tax rate: <%= current_user.income_tax_rate %> </p>
+    <p>Income: <%= current_user.income %> </p>
+
+  </div>
+
+
+</div>
+</div>

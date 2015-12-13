@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Capstone</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="container">
+
+  <div class="container">
+   <ul class="nav nav-pills">
+    
+    <% if current_user %>
+      <li role="presentation"><a href="/listings">Dashboard</a></li>
+      <li role="presentation"><a href="/assumptions">Profile</a></li>
+      <li role="presentation">
+      <div class="sign-out">
+        <li>
+          <% if current_user %>
+                <%= link_to "Sign Out", "/users/sign_out", method: :delete %>
+          <% end %>
+        </li>
+      </div>
+    <% end %>
+    <% unless current_user %>
+      <li role="presentation"><a href="/users/sign_up">Sign Up</a></li>
+      <li role="presentation"><a href="/users/sign_in">Sign In</a></li>
+    <% end %>
+   </ul>
+  <div class="container">
+
+
+ <div class="container-fluid">
+    <% flash.each do |name, message| %>
+        <div class="alert alert-<%= name %> alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <%= message %>
+        </div>
+    <% end %>
+  </div>
+
+<%= yield %>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+<div class="container">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Address</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Price
+        <a href= "listings?input_sort=price&input_sort_order=<%= @new_sort_order %>"> <button type="button" class="btn btn-default" aria-label="Left Align">
+            <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
+          </button></a></th>
+          <th>Down Payment
+          <a href= "listings?input_sort=down&input_sort_order=<%= @new_sort_order %>"> <button type="button" class="btn btn-default" aria-label="Left Align">
+              <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
+            </button></a>
+          </th>
+          <th>Walk Score
+          <a href= "listings?input_sort=walk_score&input_sort_order=<%= @new_sort_order %>"> <button type="button" class="btn btn-default" aria-label="Left Align">
+              <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
+            </button></a>
+          </th>
+          <th>Transit Score
+          <a href= "listings?input_sort=transit_score&input_sort_order=<%= @new_sort_order %>"> <button type="button" class="btn btn-default" aria-label="Left Align">
+              <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
+            </button></a>
+          </th>
+          <th>Sq Ft
+          <a href= "listings?input_sort=sqft&input_sort_order=<%= @new_sort_order %>"> <button type="button" class="btn btn-default" aria-label="Left Align">
+              <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
+            </button></a>
+          </th>
+          <th>+|-
+          </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <%= form_tag "/listings", method: :post do %>
+            <td>
+              <p> <%= text_field_tag(:input_street_address, nil, {placeholder: "Street address", class: "form-control"})%> </p>
+            </td>
+             <td>
+              <p><%= text_field_tag(:input_city, nil, {placeholder: "City", class: "form-control"})%> </p></p>
+            </td>
+             <td>
+              <p><%= text_field_tag(:input_state, nil, {placeholder: "State", class: "form-control"})%> </p></p>
+            </td>
+            <td>
+              <p></p>
+            </td>
+            <td>
+              <p></p>
+            </td>
+            <td>
+              <p></p>
+            </td>
+            <td>
+              <p></p>
+            </td>
+            <td>
+              <p></p>
+            </td>
+            <td>
+              <%= button_tag '+', class: "btn btn-default" %>
+            </td>
+            <div> 
+
+            </div>
+            <% end %>
+          </tr>
+        </tbody>
+        <tbody>
+          <% @listings.reverse_order.each do |listing| %>
+          <tr>
+            <td>
+              <p> <%=listing.street_adress %> </p>
+            </td>
+              <td>
+              <p> <%=listing.city %> </p>
+            </td>
+              <td>
+              <p> <%=listing.state %> </p>
+            </td>
+            <td>
+              <p><%= listing.price  %></p>
+            </td>
+            <td>
+              <p>Fix later</p>
+            </td>
+            <td>
+              <p><%= listing.walk_score  %></p>
+            </td>
+            <td>
+              <p><%= listing.transit_score %></p>
+            </td>
+            <td>
+              <p><%= listing.sqft  %></p>
+            </td>
+            <td>
+              <p><%= link_to "Delete", "/listings/#{listing.id}", method: :delete %></p>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
