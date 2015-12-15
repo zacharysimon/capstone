@@ -23,19 +23,21 @@ class ListingsController < ApplicationController
   end
 
   def create
-    response = zillow_get_search_results(params)
+    response = zillow_get_deep_search_results(params)
 
     p response 
 
     @listing = Listing.new(
       user_id: current_user.id,
-      street_adress: params[:input_street_address],
-      city: params[:input_city],
-      state: params[:input_state],
+      street_adress: response[:address],
+      city: response[:city],
+      state: response[:state],
       latitude: response[:latitude],
       longitude: response[:longitude],
       price: response[:price],
-      zpid: response[:zpid]
+      zpid: response[:zpid],
+      zip_code: response[:zipcode],
+      url: response[:url]
       )
 
     if @listing.save 

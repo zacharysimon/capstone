@@ -10,9 +10,6 @@
             <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
           </button></a></th>
           <th>Down Payment
-          <a href= "listings?input_sort=down&input_sort_order=<%= @new_sort_order %>"> <button type="button" class="btn btn-default" aria-label="Left Align">
-              <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
-            </button></a>
           </th>
           <th>Walk Score
           <a href= "listings?input_sort=walk_score&input_sort_order=<%= @new_sort_order %>"> <button type="button" class="btn btn-default" aria-label="Left Align">
@@ -41,10 +38,10 @@
               <p> <%= text_field_tag(:input_street_address, nil, {placeholder: "Street address", class: "form-control"})%> </p>
             </td>
              <td>
-              <p><%= text_field_tag(:input_city, nil, {placeholder: "City", class: "form-control"})%> </p></p>
+              <p><%= text_field_tag(:input_city, nil, {placeholder: "City", class: "form-control"})%> </p>
             </td>
              <td>
-              <p><%= text_field_tag(:input_state, nil, {placeholder: "State", class: "form-control"})%> </p></p>
+              <p><%= text_field_tag(:input_state, nil, {placeholder: "State", class: "form-control"})%> </p>
             </td>
             <td>
               <p></p>
