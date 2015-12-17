@@ -10,43 +10,59 @@
 
 </head>
 <body>
-<div class="container">
-
-  <div class="container">
-   <ul class="nav nav-pills">
-    
-    <% if current_user %>
-      <li role="presentation"><a href="/listings">Dashboard</a></li>
-      <li role="presentation"><a href="/assumptions">Profile</a></li>
-      <li role="presentation">
-      <div class="sign-out">
-        <li>
-          <% if current_user %>
-                <%= link_to "Sign Out", "/users/sign_out", method: :delete %>
-          <% end %>
-        </li>
+  <div class="row border-bottom">
+    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+      <div class="navbar-header">
+        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+        <form role="search" class="navbar-form-custom" method="post" action="">
+          <div class="form-group">
+            <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search"/>
+          </div>
+        </form>
       </div>
-    <% end %>
-    <% unless current_user %>
-      <li role="presentation"><a href="/users/sign_up">Sign Up</a></li>
-      <li role="presentation"><a href="/users/sign_in">Sign In</a></li>
-    <% end %>
-   </ul>
-  <div class="container">
-
-
- <div class="container-fluid">
-    <% flash.each do |name, message| %>
-        <div class="alert alert-<%= name %> alert-dismissible" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <%= message %>
-        </div>
-    <% end %>
+      <ul class="nav navbar-top-links navbar-right">
+        <li>
+          <span class="m-r-sm text-muted welcome-message">Welcome to Holmes</span>
+        </li>
+        <li class="dropdown">
+          <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+            <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
+          </a>
+          
+        </li>
+        <li>
+          <a href="#">
+            <i class="fa fa-sign-out"></i> Log out
+          </a>
+        </li>
+      </ul>
+    </nav>
   </div>
+
+
+<!-- all this stuff is good to go for nav bar! 
+-->
+<div class="footer">
+  <div class="pull-right">
+    Example text
+  </div>
+  <div>
+    <strong>Copyright</strong> Example Company &copy; 2014-2015
+  </div>
+</div>
+
+<div class="container-fluid">
+  <% flash.each do |name, message| %>
+  <div class="alert alert-<%= name %> alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <%= message %>
+  </div>
+  <% end %>
+</div>
 
 <%= yield %>
 
-</div>
+
 
 </body>
 </html>
