@@ -37,7 +37,14 @@ class ListingsController < ApplicationController
       price: response[:price],
       zpid: response[:zpid],
       zip_code: response[:zipcode],
-      url: response[:url]
+      url: response[:url],
+      lastdatesold: response[:lastdatesold],
+      lastsoldprice: response[:lastsoldprice],
+      bathrooms: response[:bathrooms],
+      bedrooms: response[:bedrooms],
+      sqft: response[:sqft],
+      home_type: response[:hometype],
+      yearbuilt: response[:yearbuilt],
       )
 
     if @listing.save 

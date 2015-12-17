@@ -71,7 +71,7 @@
           <% @listings.reverse_order.each do |listing| %>
           <tr>
             <td>
-              <p> <%=listing.street_adress %> </p>
+              <p><a href="/listings/<%= listing.id %>"><%=listing.street_adress %> </a></p>
             </td>
               <td>
               <p> <%=listing.city %> </p>
