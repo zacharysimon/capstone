@@ -1,8 +1,6 @@
 class ListingsController < ApplicationController
   include ListingsHelper
   include HTTParty 
-  def home
-  end
 
   def index
     sort_attribute = params[:input_sort]
@@ -61,6 +59,7 @@ class ListingsController < ApplicationController
   end
 
   def show
+    @listing = Listing.find_by(id: params[:id])
   end
 
   def edit

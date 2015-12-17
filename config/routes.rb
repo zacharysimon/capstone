@@ -15,6 +15,11 @@ Rails.application.routes.draw do
   get '/assumptions/edit' => 'assumptions#edit'
   patch '/assumptions' => 'assumptions#update'
 
+  patch '/comments/:id' => 'comments#update'
+  get '/comments/new' => 'comments#new'
+  get '/comments/:id/edit' => 'comments#edit'
+  post '/comments' => 'comments#create'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

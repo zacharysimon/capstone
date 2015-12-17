@@ -26,6 +26,9 @@
               <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
             </button></a>
           </th>
+          <th>
+            Amenities Score
+          </th>
           <th>+|-
           </th>
           </tr>
@@ -42,6 +45,9 @@
             </td>
              <td>
               <p><%= text_field_tag(:input_state, nil, {placeholder: "State", class: "form-control"})%> </p>
+            </td>
+            <td>
+              <p></p>
             </td>
             <td>
               <p></p>
@@ -93,6 +99,9 @@
             </td>
             <td>
               <p><%= listing.sqft  %></p>
+            </td>
+            <td>
+              <p><%= listing.comments.find_by(comment_type: "amenities").score  %></p>
             </td>
             <td>
               <p><%= link_to "Delete", "/listings/#{listing.id}", method: :delete %></p>

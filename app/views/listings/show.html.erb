@@ -1,1 +1,28 @@
-show.html.erb
+<h1><%= @listing.street_adress %></h1>
+
+<div>
+
+  <div class = "row">
+  <%= form_tag "/comments", method: :post do %>
+  <%= button_tag 'Create', class: "btn btn-default" %>
+  <div class = "well col-md-4">
+    <h4><%= text_field_tag(:input_comment_type, 'Create New Comment') %></h4>
+    <p><%= text_field_tag(:input_score, 'Score') %> </p>
+    <p><%= text_field_tag(:input_comment, 'Enter Comment') %> </p>
+    <p><%= hidden_field_tag(:input_listing_id, @listing.id) %> </p>
+  </div>  
+  <% end %>
+
+
+<% @listing.comments.each do |comment| %>
+  <div class = "well col-md-4">
+    <h4><%= comment.comment_type %></h4>
+    <p><%= comment.score %></p>
+    <p><%= comment.comment %></p>
+  </div>  
+<% end %>
+
+
+
+</div>
+</div>
