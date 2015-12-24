@@ -9,42 +9,47 @@
   <link rel="shortcut icon" href="../assets/favicon.ico">
 
 </head>
+
 <body>
+
   <div class="row border-bottom white-bg">
     <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-    <div class="navbar-header">
-        <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
-            <i class="fa fa-reorder"></i>
-        </button>
-        <a href="/listings" class="navbar-brand">Holmes</a>
-    </div>
-      <ul class="nav navbar-top-links navbar-right">
-        <li>
-          <span class="m-r-sm text-muted welcome-message">Welcome to Holmes</span>
-        </li>
-        <li class="dropdown">
-            <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Menu <span class="caret"></span></a>
-            <ul role="menu" class="dropdown-menu">
-                <li><a href="">Profile</a></li>
-                <li><a href="">Assumptions</a></li>
-                <li><a href="">About</a></li>
-            </ul>
-        </li>
-        
-        <% if current_user %>
+      <div class="navbar-header">
+          <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+              <i class="fa fa-reorder"></i>
+          </button>
+          <a href="/listings" class="navbar-brand">Holmes</a>
+      </div>
+      <div class="navbar-collapse collapse pull-right" id="navbar">
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+              <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Menu <span class="caret"></span></a>
+              <ul role="menu" class="dropdown-menu">
+                  <li><a href="/assumptions">Assumptions</a></li>
+                  <li><a href="">Calculation Steps</a></li>
+                  <li><a href="">My favorites</a></li>
+                  <li><a href="/listings">Listings</a></li>
+              </ul>
+          </li>
+          <li class="divider"></li>
+        </ul>
+        <ul class="nav navbar-top-links navbar-right">
+          <% if current_user %>
           <li>
             <a href="/users/sign_in">
               <i class="fa fa-sign-out"></i> Log out
             </a>
           </li>
-        <% else %>
+          <% else %>
           <li>
             <a href="/users/sign_in">
               <i class="fa fa-sign-out"></i> Sign In
             </a>
           </li>
-        <% end %>
-      </ul>
+          <% end %>
+          </li>
+        </ul>
+      </div>
     </nav>
   </div>
 

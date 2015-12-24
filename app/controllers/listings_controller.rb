@@ -25,6 +25,8 @@ class ListingsController < ApplicationController
 
     p response 
 
+    Listing.create(response)
+
     @listing = Listing.new(
       user_id: current_user.id,
       street_adress: response[:address],

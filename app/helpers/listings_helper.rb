@@ -46,6 +46,8 @@ module ListingsHelper
   }
   end
 
+  
+
    
 
 

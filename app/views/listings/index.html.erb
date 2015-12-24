@@ -13,6 +13,11 @@
          </div>
         <div class="ibox-content">
          <div class="row">
+            <div class="col-sm-9">
+                <div class="input-group">
+                    <a href='/'>Create new listing </a>
+                </div>
+            </div>
             <div class="col-sm-3">
                 <div class="input-group">
                     <input type="text" placeholder="Search" class="input-sm form-control"> <span class="input-group-btn">
@@ -30,7 +35,7 @@
                         <th>Price</th>
                         <th>Sq Ft</th>
                         <th>Cost / Sq Ft</th>
-                        <th>Monthly Costs</th>
+                        <th>Monthly Debt Service</th>
                         <th>Walk Score</th>
                         <th>Amenities Score</th>
                         <th>Building Score</th>
@@ -40,11 +45,11 @@
                     <% @listings.each do |listing| %>
                     <tr>
                         <td><%= listing.id %></td>
-                        <td><a href="/listings/<%=listing.id %>"><%= listing.street_adress %></a></td>
+                        <td><a href="/listings/<%= listing.id %>"><%= listing.street_adress %></a></td>
                         <td><%= listing.price %></td>
                         <td><%= listing.sqft %></td>
                         <td><%= listing.cost_per_sqft %></td>
-                        <td>TODO - Monthly Costs</td>
+                        <td><%=listing.monthly_pmt(current_user) %></td>
                         <td><%= listing.walk_score %></td>
                         <td><%= listing.comments.find_by(comment_type: "amenities").score %></td>
                         <td>FIX</td>
