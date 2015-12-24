@@ -1,35 +1,154 @@
 <div>
-  <div class = "row">
+    <div class = "row">
 
-  <div class = "well col-md-4">
-    <h4>User info</h4>
-    <p>First Name: <%= current_user.first_name %> </p>
-    <p>Last Name: <%= current_user.last_name %> </p>
-    <p>Email: <%= current_user.email %> </p>
+    <div class = "well col-md-4">
+      <h4>User info</h4>
+      <p>First Name: <%= current_user.first_name %> </p>
+      <p>Last Name: <%= current_user.last_name %> </p>
+      <p>Email: <%= current_user.email %> </p>
 
-  </div>  
-  <div class = "well col-md-4">
-    <h4>Mortgage Assumptions</h4>
-    <p>Percent Down Payment: <%= current_user.percent_down_pmt %>% </p>
-    <p>Credit: <%= current_user.credit_score_bucket %> </p>
-    <p>Loan Type: <%= current_user.loan_type %> </p>
+    </div>  
+    <div class = "well col-md-4">
+      <h4>Mortgage Assumptions</h4>
+      <p>Percent Down Payment: <%= current_user.percent_down_pmt %>% </p>
+      <p>Loan Type: <%= current_user.loan_type %> </p>
+    </div>  
 
-  </div>  
-
-  <div class = "well col-md-4">
-    <h4>Rent vs. Buy Assumptions</h4>
-    <p>Acquisition Costs: <%= current_user.acquisition_costs %>% </p>
-    <p>Disposition Costs: <%= current_user.disposition_costs %>% </p>
-    <p>Annual Maintenance: <%= current_user.annual_maintenance %> </p>
-    <p>Annual Insurance: <%= current_user.annual_insurance %> </p>
-    <p>Current rent: Add this once migrated </p>
-    <p>Rent growth: <%= current_user.rent_growth %> </p>
-    <p>Property Appreciation: <%= current_user.property_appreciation %> </p>
-    <p>Income tax rate: <%= current_user.income_tax_rate %> </p>
-    <p>Income: <%= current_user.income %> </p>
-
+    <div class = "well col-md-4">
+      <h4>Rent vs. Buy Assumptions</h4>
+      <p>Acquisition Costs: <%= current_user.acquisition_costs %>% </p>
+      <p>Disposition Costs: <%= current_user.disposition_costs %>% </p>
+      <p>Annual Maintenance: <%= current_user.annual_maintenance %> </p>
+      <p>Annual Insurance: <%= current_user.annual_insurance %> </p>
+      <p>Current rent: Add this once migrated </p>
+      <p>Rent growth: <%= current_user.rent_growth %> </p>
+      <p>Property Appreciation: <%= current_user.property_appreciation %> </p>
+      <p>Income tax rate: <%= current_user.income_tax_rate %> </p>
+      <p>Income: <%= current_user.income %> </p>
+    </div>
   </div>
-
-
 </div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>User project list</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <table class="table table-hover no-margins">
+                    <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>User</th>
+                        <th>Value</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><small>Pending...</small></td>
+                        <td><i class="fa fa-clock-o"></i> 11:20pm</td>
+                        <td>Samantha</td>
+                        <td class="text-navy"> <i class="fa fa-level-up"></i> 24% </td>
+                    </tr>
+                    <tr>
+                        <td><span class="label label-warning">Canceled</span> </td>
+                        <td><i class="fa fa-clock-o"></i> 10:40am</td>
+                        <td>Monica</td>
+                        <td class="text-navy"> <i class="fa fa-level-up"></i> 66% </td>
+                    </tr>
+                    <tr>
+                        <td><small>Pending...</small> </td>
+                        <td><i class="fa fa-clock-o"></i> 01:30pm</td>
+                        <td>John</td>
+                        <td class="text-navy"> <i class="fa fa-level-up"></i> 54% </td>
+                    </tr>
+                    <tr>
+                        <td><small>Pending...</small> </td>
+                        <td><i class="fa fa-clock-o"></i> 02:20pm</td>
+                        <td>Agnes</td>
+                        <td class="text-navy"> <i class="fa fa-level-up"></i> 12% </td>
+                    </tr>
+                    <tr>
+                        <td><small>Pending...</small> </td>
+                        <td><i class="fa fa-clock-o"></i> 09:40pm</td>
+                        <td>Janet</td>
+                        <td class="text-navy"> <i class="fa fa-level-up"></i> 22% </td>
+                    </tr>
+                    <tr>
+                        <td><span class="label label-primary">Completed</span> </td>
+                        <td><i class="fa fa-clock-o"></i> 04:10am</td>
+                        <td>Amelia</td>
+                        <td class="text-navy"> <i class="fa fa-level-up"></i> 66% </td>
+                    </tr>
+                    <tr>
+                        <td><small>Pending...</small> </td>
+                        <td><i class="fa fa-clock-o"></i> 12:08am</td>
+                        <td>Damian</td>
+                        <td class="text-navy"> <i class="fa fa-level-up"></i> 23% </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Small todo list</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <ul class="todo-list m-t small-list">
+                    <li>
+                        <a href="#" class="check-link"><i class="fa fa-check-square"></i> </a>
+                        <span class="m-l-xs todo-completed">Buy a milk</span>
+
+                    </li>
+                    <li>
+                        <a href="#" class="check-link"><i class="fa fa-square-o"></i> </a>
+                        <span class="m-l-xs">Go to shop and find some products.</span>
+
+                    </li>
+                    <li>
+                        <a href="#" class="check-link"><i class="fa fa-square-o"></i> </a>
+                        <span class="m-l-xs">Send documents to Mike</span>
+                        <small class="label label-primary"><i class="fa fa-clock-o"></i> 1 mins</small>
+                    </li>
+                    <li>
+                        <a href="#" class="check-link"><i class="fa fa-square-o"></i> </a>
+                        <span class="m-l-xs">Go to the doctor dr Smith</span>
+                    </li>
+                    <li>
+                        <a href="#" class="check-link"><i class="fa fa-check-square"></i> </a>
+                        <span class="m-l-xs todo-completed">Plan vacation</span>
+                    </li>
+                    <li>
+                        <a href="#" class="check-link"><i class="fa fa-square-o"></i> </a>
+                        <span class="m-l-xs">Create new stuff</span>
+                    </li>
+                    <li>
+                        <a href="#" class="check-link"><i class="fa fa-square-o"></i> </a>
+                        <span class="m-l-xs">Call to Anna for dinner</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
