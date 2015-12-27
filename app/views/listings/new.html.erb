@@ -1,36 +1,40 @@
 <div class = "container">
+
+  <%= form_tag "/listings", method: :post do %>
   <div class = "well">
-    <%= form_tag "/listings", method: :post do %>
      <div>
         <%= label_tag :address %> 
-        <%= text_field_tag(:address) %> 
-     </div>
-     <div>
+        <%= text_field_tag(:address, nil, class: "form-control") %> 
         <%= label_tag :city %> 
-        <%= text_field_tag(:city) %> 
+        <%= text_field_tag(:city, nil, class: "form-control") %> 
         <%= label_tag :state %> 
-        <%= text_field_tag(:state) %> 
+        <%= text_field_tag(:state, nil, class: "form-control") %> 
      </div>
-    <%= hidden_field_tag(:input_listing_id, @listing.id) %> 
-    <%= button_tag 'Create', class: "btn btn-default" %> 
-    <% end %>
+  </div>
+  <div class = "well">
+    <div>
+      <%= label_tag :price %> 
+      <%= text_field_tag(:price, nil, class: "form-control") %> 
+      <%= label_tag :bedrooms %> 
+      <%= text_field_tag(:bedrooms, nil, class: "form-control") %> 
+      <%= label_tag :bathrooms %> 
+      <%= text_field_tag(:bathrooms, nil, class: "form-control") %> 
+      <%= label_tag :sqft %> 
+      <%= text_field_tag(:sqft, nil, class: "form-control") %> 
+    </div>
+  </div>
+  <div class = "well">
+    <div>
+      <%= label_tag :monthly_hoa_assessment %> 
+      <%= text_field_tag(:hoa_assessment, nil, class: "form-control") %> 
+      <%= label_tag :annual_property_tax %> 
+      <%= text_field_tag(:property_tax, nil, class: "form-control") %> 
+    </div>
   </div>
 
+  <%= hidden_field_tag(:input_listing_id, @listing.id) %> 
+  <%= button_tag 'Create', class: "btn btn-default" %> 
 
-  <div class = "container">
-    <div class = "well">
-      <p>Price: <%= @listing.price %></p>
-      <p>Bedrooms: <%= @listing.bedrooms %></p>
-      <p>Bathrooms: <%= @listing.bathrooms %></p>
-      <p>Square Feet: <%= @listing.sqft %></p>
-    </div>
-    <div class = "well">
-      <p>Walk Score: <%= @listing.walk_score %></p>
-      <p>Transit Score: <%= @listing.transit_score %></p>
-    </div>
-    <div class = "well">
-      <p>Monthly HOA Fees: <%= @listing.hoa_assessment %></p>
-      <p>Annual Property Tax: <%= @listing.tax_assessment %></p>
-    </div>
+  <% end %>
 
-  </div>
+</div>
