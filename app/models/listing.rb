@@ -1,19 +1,21 @@
 class Listing < ActiveRecord::Base
   include Finance
+
   belongs_to :user
   has_many :comments 
 
 
-  # use finance gem to determine accrued equity in property, total interest payments, etc
-  # figure out how to DRY this up - same as monthly PMT method
-
-
   def zillow_mortgage_api(user)
-
-     if user
-      url = "http://www.zillow.com/webservice/GetMonthlyPayments.htm?zws-id=X1-ZWz19ytk7im2ob_728x4&price=#{price}&down=#{user.percent_down_pmt.to_i}"
+    if price != nil
+      if user
+        url = "http://www.zillow.com/webservice/GetMonthlyPayments.htm?zws-id=X1-ZWz19ytk7im2ob_728x4&price=#{price}&down=#{user.percent_down_pmt.to_i}"
+      else
+        # defaults to 20% downpayment
+        url = "http://www.zillow.com/webservice/GetMonthlyPayments.htm?zws-id=X1-ZWz19ytk7im2ob_728x4&price=#{price}&down=20"
+      end
+    # if there is no price, defaults to 100000
     else
-      url = "http://www.zillow.com/webservice/GetMonthlyPayments.htm?zws-id=X1-ZWz19ytk7im2ob_728x4&price=#{price}&down=20"
+      url = "http://www.zillow.com/webservice/GetMonthlyPayments.htm?zws-id=X1-ZWz19ytk7im2ob_728x4&price=100000&down=20"
     end
 
     response = HTTParty.get(url)
@@ -23,7 +25,6 @@ class Listing < ActiveRecord::Base
     else 
       return response.parsed_response["paymentsSummary"]["response"]["payment"][1]
     end
-
   end
 
   def cost_per_sqft
@@ -47,7 +48,7 @@ class Listing < ActiveRecord::Base
   end
 
 
-#below are methods for investing data, which will be secondary features once its all built
+  #below are methods for investing data, which will be secondary features once its all built
 
   def total_interest(user)
     
@@ -61,7 +62,7 @@ class Listing < ActiveRecord::Base
     end
 
     amortization = Amortization.new(loan_amount, rate)
-    return amortization.payment
+    return amortization.interest.sum
   end
 
   def five_yr_equity (user)
@@ -73,6 +74,5 @@ class Listing < ActiveRecord::Base
     five_yr_pmt = amortization.payments[0,72].sum
     return five_yr_pmt - five_yr_interest + (price - loan_amount)
   end
-
 
 end

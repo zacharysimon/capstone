@@ -15,9 +15,9 @@ Rails.application.routes.draw do
   get '/assumptions/edit' => 'assumptions#edit'
   patch '/assumptions' => 'assumptions#update'
 
-  patch '/comments/:id' => 'comments#update'
+  patch ':id/comments' => 'comments#update'
   get '/comments/new' => 'comments#new'
-  get '/comments/:id/edit' => 'comments#edit'
+  get '/comments/edit' => 'comments#edit'
   post '/comments' => 'comments#create'
 
 

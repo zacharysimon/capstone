@@ -31,7 +31,7 @@ class ListingsController < ApplicationController
 
   def create
 
-    inputs = defaults(params)
+    inputs = calulate_default_values(params)
 
     @listing = Listing.new(
       user_id: current_user.id,
@@ -46,7 +46,12 @@ class ListingsController < ApplicationController
       bathrooms: inputs[:bathrooms],
       bedrooms: inputs[:bedrooms],
       sqft: inputs[:sqft],
+      hoa_assessment: inputs[:hoa_assessment],
+      tax_assessment: inputs[:tax_assessment]
       )
+
+    p inputs[:tax_assessment]
+    p inputs[:hoa_assessment]
 
     if @listing.save 
       flash[:success] = "Listing successfully created!"
