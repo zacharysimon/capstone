@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151210161107) do
+ActiveRecord::Schema.define(version: 20151227014448) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id",      limit: 4
@@ -24,35 +24,26 @@ ActiveRecord::Schema.define(version: 20151210161107) do
   end
 
   create_table "listings", force: :cascade do |t|
-    t.text     "street_adress",         limit: 65535
-    t.string   "zip_code",              limit: 255
-    t.string   "city",                  limit: 255
-    t.string   "state",                 limit: 255
-    t.float    "latitude",              limit: 24
-    t.float    "longitude",             limit: 24
-    t.string   "walk_score",            limit: 255
-    t.string   "transit_score",         limit: 255
-    t.integer  "rent_zestimate",        limit: 4
-    t.string   "url",                   limit: 255
-    t.integer  "tax_assessment",        limit: 4
-    t.integer  "sqft",                  limit: 4
-    t.string   "yearbuilt",             limit: 255
-    t.string   "lastdatesold",          limit: 255
-    t.integer  "lastsoldprice",         limit: 4
-    t.integer  "bathrooms",             limit: 4
-    t.integer  "bedrooms",              limit: 4
-    t.text     "images",                limit: 65535
-    t.integer  "zpid",                  limit: 4
-    t.integer  "price",                 limit: 4
-    t.integer  "mls_number",            limit: 4
-    t.integer  "zws_id",                limit: 4
-    t.string   "home_type",             limit: 255
-    t.text     "walkscore_description", limit: 65535
-    t.integer  "hoa_assessment",        limit: 4
-    t.boolean  "rent_cap"
-    t.integer  "user_id",               limit: 4
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.text     "address",        limit: 65535
+    t.string   "zip_code",       limit: 255
+    t.string   "city",           limit: 255
+    t.string   "state",          limit: 255
+    t.float    "latitude",       limit: 24
+    t.float    "longitude",      limit: 24
+    t.string   "walk_score",     limit: 255
+    t.string   "transit_score",  limit: 255
+    t.integer  "rent_estimate",  limit: 4
+    t.integer  "tax_assessment", limit: 4
+    t.integer  "sqft",           limit: 4
+    t.integer  "bathrooms",      limit: 4
+    t.integer  "bedrooms",       limit: 4
+    t.integer  "zpid",           limit: 4
+    t.integer  "price",          limit: 4
+    t.integer  "zws_id",         limit: 4
+    t.integer  "hoa_assessment", limit: 4
+    t.integer  "user_id",        limit: 4
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -72,7 +63,6 @@ ActiveRecord::Schema.define(version: 20151210161107) do
     t.string   "last_name",              limit: 255
     t.integer  "loan_type",              limit: 4
     t.decimal  "percent_down_pmt",                   precision: 10, scale: 4
-    t.integer  "credit_score_bucket",    limit: 4
     t.decimal  "annual_insurance",                   precision: 10, scale: 2
     t.decimal  "acquisition_costs",                  precision: 10, scale: 2
     t.decimal  "disposition_costs",                  precision: 10, scale: 2
@@ -80,7 +70,6 @@ ActiveRecord::Schema.define(version: 20151210161107) do
     t.decimal  "rent_growth",                        precision: 10, scale: 4
     t.decimal  "property_appreciation",              precision: 10, scale: 4
     t.decimal  "income_tax_rate",                    precision: 10, scale: 4
-    t.decimal  "income",                             precision: 15, scale: 2
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

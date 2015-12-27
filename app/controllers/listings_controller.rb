@@ -1,6 +1,7 @@
 class ListingsController < ApplicationController
   include ListingsHelper
   include HTTParty 
+   
 
   def index
     sort_attribute = params[:input_sort]
@@ -29,7 +30,7 @@ class ListingsController < ApplicationController
 
     @listing = Listing.new(
       user_id: current_user.id,
-      street_adress: response[:address],
+      address: response[:address],
       city: response[:city],
       state: response[:state],
       latitude: response[:latitude],
@@ -37,21 +38,15 @@ class ListingsController < ApplicationController
       price: response[:price],
       zpid: response[:zpid],
       zip_code: response[:zipcode],
-      url: response[:url],
-      lastdatesold: response[:lastdatesold],
-      lastsoldprice: response[:lastsoldprice],
       bathrooms: response[:bathrooms],
       bedrooms: response[:bedrooms],
       sqft: response[:sqft],
       home_type: response[:hometype],
-      yearbuilt: response[:yearbuilt],
       )
 
     if @listing.save 
       flash[:success] = "Listing successfully created!"
       redirect_to '/listings'
-    else
-      render :index
     end
 
   end

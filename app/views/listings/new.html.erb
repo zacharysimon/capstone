@@ -1,1 +1,36 @@
-new.html.erb
+<div class = "container">
+  <div class = "well">
+    <%= form_tag "/listings", method: :post do %>
+     <div>
+        <%= label_tag :address %> 
+        <%= text_field_tag(:address) %> 
+     </div>
+     <div>
+        <%= label_tag :city %> 
+        <%= text_field_tag(:city) %> 
+        <%= label_tag :state %> 
+        <%= text_field_tag(:state) %> 
+     </div>
+    <%= hidden_field_tag(:input_listing_id, @listing.id) %> 
+    <%= button_tag 'Create', class: "btn btn-default" %> 
+    <% end %>
+  </div>
+
+
+  <div class = "container">
+    <div class = "well">
+      <p>Price: <%= @listing.price %></p>
+      <p>Bedrooms: <%= @listing.bedrooms %></p>
+      <p>Bathrooms: <%= @listing.bathrooms %></p>
+      <p>Square Feet: <%= @listing.sqft %></p>
+    </div>
+    <div class = "well">
+      <p>Walk Score: <%= @listing.walk_score %></p>
+      <p>Transit Score: <%= @listing.transit_score %></p>
+    </div>
+    <div class = "well">
+      <p>Monthly HOA Fees: <%= @listing.hoa_assessment %></p>
+      <p>Annual Property Tax: <%= @listing.tax_assessment %></p>
+    </div>
+
+  </div>
