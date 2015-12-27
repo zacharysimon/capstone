@@ -2,9 +2,9 @@ module ListingsHelper
 
   def zillow_get_deep_search_results(params)
 
-    input_street_address = params[:input_street_address]
-    input_city = params[:input_city]
-    input_state = params[:input_state]
+    input_street_address = params[:address]
+    input_city = params[:city]
+    input_state = params[:state]
 
     response = HTTParty.get("http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=X1-ZWz19ytk7im2ob_728x4&address=#{input_street_address}&citystatezip=#{input_city},#{input_state}")
 
@@ -14,15 +14,11 @@ module ListingsHelper
     price = response["searchresults"]["response"]["results"]["result"]["zestimate"]["amount"]["__content__"]
     address = response["searchresults"]["response"]["results"]["result"]["address"]["street"]
     city = response["searchresults"]["response"]["results"]["result"]["address"]["city"]
-    url = response["searchresults"]["response"]["results"]["result"]["links"]["homedetails"]
     zipcode = response["searchresults"]["response"]["results"]["result"]["address"]["zipcode"]
     state = response["searchresults"]["response"]["results"]["result"]["address"]["state"]
     bathrooms = response["searchresults"]["response"]["results"]["result"]["bathrooms"]
     bedrooms = response["searchresults"]["response"]["results"]["result"]["bedrooms"]
     sqft = response["searchresults"]["response"]["results"]["result"]["finishedSqFt"]
-    yearbuilt = response["searchresults"]["response"]["results"]["result"]["yearBuilt"]
-    lastdatesold = response["searchresults"]["response"]["results"]["result"]["lastSoldDate"]
-    lastsoldprice = response["searchresults"]["response"]["results"]["result"]["lastSoldPrice"]["__content__"]
     hometype = response["searchresults"]["response"]["results"]["result"]["useCode"]
 
 
@@ -33,16 +29,11 @@ module ListingsHelper
     price: price,
     address: address,
     city: city,
-    url: url,
     zipcode: zipcode,
     state: state,
-    lastdatesold: lastdatesold,
-    lastsoldprice: lastsoldprice,
     bathrooms: bathrooms,
     bedrooms: bedrooms,
     sqft: sqft,
-    hometype: hometype,
-    yearbuilt: yearbuilt,
   }
   end
 

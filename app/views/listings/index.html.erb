@@ -15,7 +15,7 @@
          <div class="row">
             <div class="col-sm-9">
                 <div class="input-group">
-                    <a href='/'>Create new listing </a>
+                    <a href='/listings/new'>Create new listing </a>
                 </div>
             </div>
             <div class="col-sm-3">
@@ -45,7 +45,7 @@
                     <% @listings.each do |listing| %>
                     <tr>
                         <td><%= listing.id %></td>
-                        <td><a href="/listings/<%= listing.id %>"><%= listing.street_adress %></a></td>
+                        <td><a href="/listings/<%= listing.id %>"><%= listing.address %></a></td>
                         <td><%= listing.price %></td>
                         <td><%= listing.sqft %></td>
                         <td><%= listing.cost_per_sqft %></td>

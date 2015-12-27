@@ -1,28 +1,55 @@
-<h1><%= @listing.street_adress %></h1>
+<div class = "container">
+  <h1><%= @listing.address %></h1>
+  <h2><%= @listing.city %>, <%= @listing.state %>
 
-<div>
+  <div class = "container">
+    <div class = "well">
+      <p>Price: <%= @listing.price %></p>
+      <p>Bedrooms: <%= @listing.bedrooms %></p>
+      <p>Bathrooms: <%= @listing.bathrooms %></p>
+      <p>Square Feet: <%= @listing.sqft %></p>
+    </div>
+    <div class = "well">
+      <p>Walk Score: <%= @listing.walk_score %></p>
+      <p>Transit Score: <%= @listing.transit_score %></p>
+    </div>
+    <div class = "well">
+      <p>Monthly HOA Fees: <%= @listing.hoa_assessment %></p>
+      <p>Annual Property Tax: <%= @listing.tax_assessment %></p>
+    </div>
 
-  <div class = "row">
-  <%= form_tag "/comments", method: :post do %>
-  <%= button_tag 'Create', class: "btn btn-default" %>
-  <div class = "well col-md-4">
-    <h4><%= text_field_tag(:input_comment_type, 'Create New Comment') %></h4>
-    <p><%= text_field_tag(:input_score, 'Score') %> </p>
-    <p><%= text_field_tag(:input_comment, 'Enter Comment') %> </p>
-    <p><%= hidden_field_tag(:input_listing_id, @listing.id) %> </p>
-  </div>  
-  <% end %>
-
-
-<% @listing.comments.each do |comment| %>
-  <div class = "well col-md-4">
-    <h4><%= comment.comment_type %></h4>
-    <p><%= comment.score %></p>
-    <p><%= comment.comment %></p>
-  </div>  
-<% end %>
+  </div>
 
 
+  <div class = "comments container">
+    <div class = "container">
+      <h2>Create New Comment</h2>
+        <%= form_tag "/comments", method: :post do %>
+        <div class="form-group">
+          <%= label_tag :comment_type %>
+          <%= text_field_tag(:input_comment_type) %>
+        </div>
+        <div class="form-group">
+          <%= label_tag :score %>
+          <%= text_field_tag(:input_score) %> 
+        </div>
+        <div class="form-group">
+          <%= label_tag :comment %> 
+          <%= text_field_tag(:input_comment) %>  
+        </div>
+        <%= hidden_field_tag(:input_listing_id, @listing.id) %> 
+        <%= button_tag 'Create', class: "btn btn-default" %> 
+     <% end %>
+    </div>  
 
-</div>
+    <div class = "row">
+      <% @listing.comments.each do |comment| %>
+        <div class = "col-md-4">
+          <h4><%= comment.comment_type %></h4>
+          <p><%= comment.score %></p>
+          <p><%= comment.comment %></p>
+        </div>  
+      <% end %>
+    </div>
+  </div>
 </div>
