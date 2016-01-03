@@ -4,6 +4,7 @@ class Listing < ActiveRecord::Base
   belongs_to :user
   has_many :comments 
 
+ 
 
   def zillow_mortgage_api(user)
     if price != nil
@@ -13,7 +14,7 @@ class Listing < ActiveRecord::Base
         # defaults to 20% downpayment
         url = "http://www.zillow.com/webservice/GetMonthlyPayments.htm?zws-id=X1-ZWz19ytk7im2ob_728x4&price=#{price}&down=20"
       end
-    # if there is no price, defaults to 100000
+    # if there is no price, defaults to $100,000
     else
       url = "http://www.zillow.com/webservice/GetMonthlyPayments.htm?zws-id=X1-ZWz19ytk7im2ob_728x4&price=100000&down=20"
     end
@@ -23,8 +24,10 @@ class Listing < ActiveRecord::Base
     if user.loan_type == 30
       return response.parsed_response["paymentsSummary"]["response"]["payment"][0]
     else 
+      #sets default loan type to 15 yr fixed if a user isn't logged in
       return response.parsed_response["paymentsSummary"]["response"]["payment"][1]
     end
+
   end
 
   def cost_per_sqft
@@ -48,12 +51,15 @@ class Listing < ActiveRecord::Base
   end
 
 
+
+
+
   #below are methods for investing data, which will be secondary features once its all built
 
-  def total_interest(user)
+  def loan_stats(user)
     
     interest_rate = zillow_mortgage_api(User.first)["rate"]
-    loan_amount = price * (1 - (user.percent_down_pmt / 100))
+    loan_amount = 250000
 
     if user.loan_type == 30
       rate = Rate.new(interest_rate, :apr, :duration => (30 * 12))
@@ -62,17 +68,24 @@ class Listing < ActiveRecord::Base
     end
 
     amortization = Amortization.new(loan_amount, rate)
-    return amortization.interest.sum
-  end
+    
+    total_cost = amortization.payments.sum
+    total_interest = amortization.interest.sum
+    five_yr_interest = amortization.interest[0,60].sum
+    five_yr_pmt = amortization.payments[0,60].sum
+    five_yr_equity = five_yr_pmt - five_yr_interest
 
-  def five_yr_equity (user)
-    loan_amount = price * (1 - (user.percent_down_pmt / 100))
-    rate = Rate.new( :apr, :duration => (30*12))
-    amortization = Amortization.new(loan_amount, rate)
+    return {
+            "rate" => rate,
+            "interest_rate" => interest_rate,
+            "loan_amount" => loan_amount,
+            "total_cost" => total_cost,
+            "total_interest" => total_interest,
+            "five_yr_interest" => five_yr_interest,
+            "five_yr_pmt" => five_yr_pmt,
+            "five_yr_equity" => five_yr_equity,
+            }
 
-    five_yr_interest = amortization.interest[0,72].sum
-    five_yr_pmt = amortization.payments[0,72].sum
-    return five_yr_pmt - five_yr_interest + (price - loan_amount)
   end
 
 end

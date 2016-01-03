@@ -1,40 +1,27 @@
-<div class="wrapper wrapper-content">
- <div class="container">
-  <div class="row">
-   <div class="col-lg-12">
-    <div class="ibox float-e-margins">
-         <div class="ibox-title">
-           <h5>Dashboard</h5>
-             <div class="ibox-tools">
-               <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                 <i class="fa fa-wrench"></i>
-               </a>
-             </div>
-         </div>
-        <div class="ibox-content">
+<div class="dashboard container">
+    
+    <div class="ibox-content ibox">
          <div class="row">
             <div class="col-sm-9">
                 <div class="input-group">
                     <a href='/listings/new'>Create new listing </a>
                 </div>
             </div>
-            <div class="col-sm-3">
-                <div class="input-group">
-                    <input type="text" placeholder="Search" class="input-sm form-control"> <span class="input-group-btn">
-                    <button type="button" class="btn btn-sm btn-primary"> Go!</button></span>
-                </div>
+            <div class="col-sm-3 wrench">
+                <a href="#">
+                    <i class="fa fa-wrench"></i>
+                </a>
             </div>
          </div>
-        <div class="table-responsive">
-            <table class="table table-striped">
+    </div>
+    <div class="table table-bordered table-striped">
+            <table class="table">
                 <thead>
                     <tr>
-
-                        <th>Id</th>
                         <th>Address</th>
                         <th>Price</th>
                         <th>Sq Ft</th>
-                        <th>Cost / Sq Ft</th>
+                        <th>Cost / SqFt</th>
                         <th>Monthly Debt Service</th>
                         <th>Walk Score</th>
                         <th>Amenities Score</th>
@@ -44,26 +31,17 @@
                 <tbody>
                     <% @listings.each do |listing| %>
                     <tr>
-                        <td><%= listing.id %></td>
                         <td><a href="/listings/<%= listing.id %>"><%= listing.address %></a></td>
                         <td><%= listing.price %></td>
                         <td><%= listing.sqft %></td>
                         <td><%= listing.cost_per_sqft %></td>
                         <td><%=listing.monthly_pmt(current_user) %></td>
                         <td><%= listing.walk_score %></td>
-                        <td><%= listing.comments.find_by(comment_type: "amenities").score %></td>
+                        <td> listing.comments.find_by(comment_type: "amenities").score</td>
                         <td>FIX</td>
                     </tr>
                     <% end %>
                 </tbody>
             </table>
-        </div>
-       </div>
-    </div>
-</div>
-
-</div>
-
-</div>
-
+     </div>
 </div>

@@ -1,23 +1,22 @@
-<div>
+<div class = "container">
 <%= form_tag "/assumptions", method: :patch do %>
   <div class = "row">
-  <%= button_tag 'Update', class: "btn btn-default" %>
-  <div class = "well col-md-4">
+  <%= button_tag 'Update', class: "btn btn-default pull-right" %>
+  <div class = "well col-md-12">
     <h4>User info</h4>
     <p>First Name: <%= current_user.first_name %> </p>
     <p>Last Name: <%= current_user.last_name %> </p>
     <p>Email: <%= current_user.email %> </p>
 
   </div>  
-  <div class = "well col-md-4">
+  <div class = "well col-md-12">
     <h4>Mortgage Assumptions</h4>
     <p>Percent Down Payment:<%= text_field_tag(:input_percent_down_pmt, current_user.percent_down_pmt)%> %</p>
-    <p>Credit: <%= text_field_tag(:input_credit_score_bucket, current_user.credit_score_bucket)%>  </p>
-    <p>Loan Type: <%= text_field_tag(:input_loan_type, current_user.loan_type) %>  </p>
+    <p>Loan Type: <%= text_field_tag(:input_loan_type, current_user.loan_type) %> year fixed </p>
 
   </div>  
 
-  <div class = "well col-md-4">
+  <div class = "well col-md-12">
     <h4>Rent vs. Buy Assumptions</h4>
     <p>Acquisition Costs:<%= text_field_tag(:input_acquisition_costs, current_user.acquisition_costs) %> %</p>
     <p>Disposition Costs:<%= text_field_tag(:input_disposition_costs, current_user.disposition_costs) %> %</p>
@@ -27,8 +26,6 @@
     <p>Rent growth:<%= text_field_tag(:input_rent_growth, current_user.rent_growth)%>%</p>
     <p>Property Appreciation:<%= text_field_tag(:input_property_appreciation, current_user.property_appreciation)%>%</p>
     <p>Income tax rate:<%= text_field_tag(:input_income_tax_rate, current_user.income_tax_rate)%>%</p>
-    <p>Income:<%= text_field_tag(:input_income, current_user.income)%> </p>
-
   </div>
 
 <% end %>
