@@ -4,25 +4,7 @@ class ListingsController < ApplicationController
    
 
   def index
-
-    #this code is what makes me able to sort based on certain values, will probably replace this with JS soon
-    # sort_attribute = params[:input_sort]
-    # @sort_order = params[:input_sort_order]
-
-    # if params[:input_sort_order] == "asc"
-    #   @new_sort_order = "desc"
-    # else
-    #   @new_sort_order = "asc"
-    # end
-
-    #  if params[:input_sort] && params[:input_sort_order]
-    #   @listings = current_user.listings.order(sort_attribute => @sort_order)
-    #  else
-    #   @listings = current_user.listings.all
-    #  end
-
     @listings = current_user.listings.all
-
   end
 
   def new
@@ -47,7 +29,8 @@ class ListingsController < ApplicationController
       bedrooms: inputs[:bedrooms],
       sqft: inputs[:sqft],
       hoa_assessment: inputs[:hoa_assessment],
-      tax_assessment: inputs[:tax_assessment]
+      tax_assessment: inputs[:tax_assessment],
+      walk_score: inputs[:walk_score]
       )
 
     p inputs[:tax_assessment]

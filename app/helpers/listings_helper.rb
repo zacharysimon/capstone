@@ -1,5 +1,19 @@
 module ListingsHelper
 
+  def walk_score_api(zillow_lat, zillow_lon)
+
+    input_lat = zillow_lat
+    input_lon = zillow_lon
+
+    response = HTTParty.get("http://api.walkscore.com/score?format=xml&lat=#{input_lat}&lon=#{input_lon}&wsapikey=a6bc24ea405f37d3b976e634c478d688")
+
+    walk_score = response.parsed_response["result"]["walkscore"]
+
+    {
+        walk_score: walk_score
+    }
+  end
+
   def zillow_get_deep_search_results(params)
 
     input_street_address = params[:address]
@@ -9,8 +23,7 @@ module ListingsHelper
     response = HTTParty.get("http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=X1-ZWz19ytk7im2ob_728x4&address=#{input_street_address}&citystatezip=#{input_city},#{input_state}")
 
     if response.parsed_response["searchresults"]["message"]["code"] != "508"
-
-        if response.parsed_response["searchresults"]["response"]["results"]["result"].length > 0
+        if response.parsed_response["searchresults"]["response"]["results"]["result"].length > 1
             zillow_response = response.parsed_response["searchresults"]["response"]["results"]["result"][0]
         else
             zillow_response = response.parsed_response["searchresults"]["response"]["results"]["result"]
@@ -47,6 +60,7 @@ module ListingsHelper
   def calulate_default_values(params)
 
     zillow = zillow_get_deep_search_results(params)
+    walk_score = walk_score_api(zillow[:latitude], zillow[:longitude])
 
     if zillow[:zpid] == nil
         zpid = 0000
@@ -90,6 +104,11 @@ module ListingsHelper
     else bathrooms = zillow[:bathrooms]
     end
 
+    if walk_score[:walk_score] == nil
+        walk_score = 0
+    else walk_score = walk_score[:walk_score]
+    end
+
     if zillow[:sqft] == nil
         sqft = 0
     else sqft = zillow[:sqft]    
@@ -129,6 +148,7 @@ module ListingsHelper
     sqft: sqft,
     tax_assessment: tax_assessment,
     hoa_assessment: hoa_assessment,
+    walk_score: walk_score
     }
 
   end
