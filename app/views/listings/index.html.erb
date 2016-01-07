@@ -29,18 +29,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% @listings.each do |listing| %>
-                    <tr>
-                        <td><a href="/listings/<%= listing.id %>"><%= listing.address %></a></td>
-                        <td><%= listing.price %></td>
-                        <td><%= listing.sqft %></td>
-                        <td><%= listing.cost_per_sqft %></td>
-                        <td><%=listing.monthly_pmt(current_user) %></td>
-                        <td><%= listing.walk_score %></td>
-                        <td> listing.comments.find_by(comment_type: "amenities").score</td>
-                        <td>FIX</td>
+                    <ul data-as-sortable="board.dragControlListeners" data-ng-model="items">
+                    <tr ng-repeat="listing in listings">
+                        <td><li><a href="/listings/{{ listing.id }}"> {{listing.address}}</a></li></td>
+                        <td><li> {{ listing.price }}</li></td>
+                        <td><li> {{ listing.sqft }}</li></td>
+                        <td><li> {{ listing.cost_per_sqft }}</li></td>
+                        <td><li> {{ listing.monthly_pmt(current_user) }}</li></td>
+                        <td><li> {{ listing.walk_score }}</li></td>
+                        <td><li> listing.comments.find_by(comment_type: "amenities").score</li></td>
+                        <td><li>FIX</li></td>
                     </tr>
-                    <% end %>
+                    </ul>
                 </tbody>
             </table>
      </div>

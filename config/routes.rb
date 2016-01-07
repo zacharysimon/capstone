@@ -11,6 +11,12 @@ Rails.application.routes.draw do
   patch '/listings/:id' => 'listings#update'
   delete '/listings/:id' => 'listings#destroy'
 
+  namespace :api do
+    namespace :v1 do
+      get '/listings' => 'listings#index'
+    end
+  end
+
   get '/assumptions' => 'assumptions#show' 
   get '/assumptions/edit' => 'assumptions#edit'
   patch '/assumptions' => 'assumptions#update'

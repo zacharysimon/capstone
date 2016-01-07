@@ -6,54 +6,55 @@
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
-
   <link rel="shortcut icon" href="../assets/favicon.ico">
 
 </head>
 <body>
-  <div class = "container">
-    <div class = "nav-items container">
-      <ul class="nav nav-tabs">
-        <% unless current_user %>
-          <li role="presentation"><a href="/users/sign_up">Sign Up</a></li>
-          <li role="presentation"><a href="/users/sign_in">Sign In</a></li>
-        <% end %>
+  <div class = "container" ng-app="app">
+    <div ng-controller="listingCtrl">
+      {{1 + 1}}
+      <div class = "nav-items container">
+        <ul class="nav nav-tabs">
+          <% unless current_user %>
+            <li role="presentation"><a href="/users/sign_up">Sign Up</a></li>
+            <li role="presentation"><a href="/users/sign_in">Sign In</a></li>
+          <% end %>
 
-        <li role="presentation"><a href="/listings">Dashboard</a></li>
+          <li role="presentation"><a href="/listings">Dashboard</a></li>
 
-        <% if current_user %>
-          <li role="presentation"><a href="/assumptions">Assumptions </a></li>
-        <% end %>
+          <% if current_user %>
+            <li role="presentation"><a href="/assumptions">Assumptions </a></li>
+          <% end %>
 
-        <li role="presentation"><a href="/listings">About </a></li>
+          <li role="presentation"><a href="/listings">About </a></li>
 
-        <div class="col-sm-3 navbar-form navbar-right" role="search">
-          <div class="input-group">
-            <input type="text" placeholder="Search" class="input-sm form-control"> <span class="input-group-btn">
-            <button type="button" class="btn btn-sm btn-primary"> Go!</button></span>
+          <div class="col-sm-3 navbar-form navbar-right" role="search">
+            <div class="input-group">
+              <input type="text" placeholder="Search" class="input-sm form-control"> <span class="input-group-btn">
+              <button type="button" class="btn btn-sm btn-primary"> Go!</button></span>
+            </div>
           </div>
-        </div>
 
-        <% if current_user %>
-          <li role="presentation"><%= link_to "Sign Out", "/users/sign_out", method: :delete %></li>
-        <% end %>
+          <% if current_user %>
+            <li role="presentation"><%= link_to "Sign Out", "/users/sign_out", method: :delete %></li>
+          <% end %>
 
-      </ul>
-    </div>
-
-
-    <div class="container-fluid">
-      <% flash.each do |name, message| %>
-      <div class="alert alert-<%= name %> alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <%= message %>
+        </ul>
       </div>
-      <% end %>
+
+
+      <div class="container-fluid">
+        <% flash.each do |name, message| %>
+        <div class="alert alert-<%= name %> alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <%= message %>
+        </div>
+        <% end %>
+      </div>
+
+      <%= yield %>
+
     </div>
-
-    <%= yield %>
-
   </div>
-
 </body>
 </html>
