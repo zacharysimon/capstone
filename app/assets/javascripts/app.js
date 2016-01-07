@@ -3,6 +3,6 @@
 (function() {
   "use strict";
 
-  angular.module("app", ['as.sortable']);
+  angular.module("app", ['dndLists']);
 
 })();
