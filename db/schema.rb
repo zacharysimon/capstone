@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151227014448) do
+ActiveRecord::Schema.define(version: 20160110163206) do
+
+  create_table "characteristics", force: :cascade do |t|
+    t.text "attribute_column_name", limit: 65535
+    t.text "attribute_view_name",   limit: 65535
+  end
+
+  create_table "characteristics_users", force: :cascade do |t|
+    t.integer "user_id",           limit: 4
+    t.integer "characteristic_id", limit: 4
+    t.integer "order",             limit: 4
+    t.boolean "visible"
+  end
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id",      limit: 4

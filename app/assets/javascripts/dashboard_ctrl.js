@@ -27,6 +27,15 @@
       $scope.models.lists.Hidden.push({label: "Item B" + i});
     }
 
+    $scope.models.lists.Hidden = [{
+      label: "Transit Score"
+    },{label: "Bedrooms"
+    },{label: "Bathrooms"
+    },{label: "HOA Assessment"
+    },{label: "Property Tax"
+    },{label: "Neighborhood Score"
+    }];
+
     $scope.models.lists.Visible = [{
       label: "Price"
     },{label: "Cost"

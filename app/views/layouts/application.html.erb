@@ -12,7 +12,6 @@
 <body>
   <div class = "container" ng-app="app">
     <div ng-controller="listingCtrl">
-      {{1 + 1}}
       <div class = "nav-items container">
         <ul class="nav nav-tabs">
           <% unless current_user %>
@@ -25,8 +24,6 @@
           <% if current_user %>
             <li role="presentation"><a href="/assumptions">Assumptions </a></li>
           <% end %>
-
-          <li role="presentation"><a href="/listings">About </a></li>
 
           <div class="col-sm-3 navbar-form navbar-right" role="search">
             <div class="input-group">
