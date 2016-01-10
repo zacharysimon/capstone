@@ -1,4 +1,11 @@
 class Characteristic < ActiveRecord::Base
-  belongs_to :attributes_user
-  belongs_to :user, though: :attributes_user
+  has_many :characteristics_users
+  has_many :user, through: :characteristics_users
+
+
+
+  def self.dashboard_headings(user)
+     CharacteristicsUser.where("user_id LIKE ? AND visible LIKE ?", "%#{user.id}%", true)
+  end
+
 end

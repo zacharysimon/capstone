@@ -6,8 +6,12 @@ class User < ActiveRecord::Base
 
   has_many :listings
   has_many :comments 
-  has_many :attributes_users
-  has_many :characteristics, through: :attributes_users
+  has_many :characteristics_users
+  has_many :characteristics, through: :characteristics_users
+
+  def get_dashboard
+    Characteristic.dashboard_headings(self)
+  end
 
   
 end

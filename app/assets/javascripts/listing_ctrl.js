@@ -10,17 +10,9 @@
       $scope.listings = response.data;
     });
 
-    $scope.tableHeadings = [
-      "address",
-      "price",
-      "sqft",
-      "cost_per_sqft",
-      "monthly_pmt",
-      "walk_score",
-      "amenities_score",
-      "building_score"
-    ];
-
+    $http.get("/api/v1/dashboard.json").then(function(response) {
+      $scope.headings = response.data;
+    });
 
     window.$scope = $scope;
   });
