@@ -23,14 +23,9 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="listing in listings">
-                        <td><a href="/listings/{{ listing.id }}"> {{listing.address}}</a></td>
-                        <td> {{ listing.price }}</td>
-                        <td> {{ listing.sqft }}</td>
-                        <td> {{ listing.cost_per_sqft }}</td>
-                        <td> {{ listing.monthly_pmt(current_user) }}</td>
-                        <td> {{ listing.walk_score }}</td>
-                        <td> listing.comments.find_by(comment_type: "amenities").score</td>
-                        <td>FIX</td>
+                        <td ng-repeat="dashboard in listing.dashboard">
+                            {{dashboard.attribute_value}}
+                        </td>
                     </tr>
                 </tbody>
             </table>

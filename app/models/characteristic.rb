@@ -5,7 +5,11 @@ class Characteristic < ActiveRecord::Base
 
 
   def self.dashboard_headings(user)
-     CharacteristicsUser.where("user_id LIKE ? AND visible LIKE ?", "%#{user.id}%", true)
+     CharacteristicsUser.where(user_id: user.id, visible: true).order(:order)
+  end
+
+  def self.all_dashboard_headings(user)
+    CharacteristicsUser.where(user_id: user.id).order(:order)
   end
 
 end

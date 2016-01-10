@@ -13,5 +13,8 @@ class User < ActiveRecord::Base
     Characteristic.dashboard_headings(self)
   end
 
+  def get_whole_dashboard
+    Characteristic.all_dashboard_headings(self)
+  end
   
 end

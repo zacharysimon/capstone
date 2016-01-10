@@ -132,6 +132,7 @@ module ListingsHelper
         hoa_assessment = price * 0.0015
     else hoa_assessment = params[:hoa_assessment]
     end
+    #add monthly payment here
 
 
     {
@@ -148,7 +149,8 @@ module ListingsHelper
     sqft: sqft,
     tax_assessment: tax_assessment,
     hoa_assessment: hoa_assessment,
-    walk_score: walk_score
+    walk_score: walk_score,
+    #add monthly payment here
     }
 
   end

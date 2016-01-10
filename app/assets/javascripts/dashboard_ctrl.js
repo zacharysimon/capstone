@@ -6,35 +6,23 @@
 
   angular.module("app").controller("dashboardController", function($scope) {
 
-    $scope.tableHeadings = [
-      "address",
-      "price",
-      "sqft",
-      "cost_per_sqft",
-      "monthly_pmt",
-      "walk_score",
-      "amenities_score",
-      "building_score"
-    ];
 
     $scope.models = {
       selected: null,
       lists: {"Visible": [], "Hidden": []}
     };
-    // Generate initial model
-    for (var i = 1; i <= 3; ++i) {
-      
-      $scope.models.lists.Hidden.push({label: "Item B" + i});
-    }
 
-    $scope.models.lists.Hidden = [{
-      label: "Transit Score"
-    },{label: "Bedrooms"
-    },{label: "Bathrooms"
-    },{label: "HOA Assessment"
-    },{label: "Property Tax"
-    },{label: "Neighborhood Score"
-    }];
+
+    // $scope.models.lists.Hidden = [{
+    //   label: "Transit Score"
+    // },{label: "Bedrooms"
+    // },{label: "Bathrooms"
+    // },{label: "HOA Assessment"
+    // },{label: "Property Tax"
+    // },{label: "Neighborhood Score"
+    // }];
+
+    $scope.models.lists.Hidden = $scope.hiddenHeadings;
 
     $scope.models.lists.Visible = [{
       label: "Price"

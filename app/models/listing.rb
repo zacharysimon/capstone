@@ -40,6 +40,7 @@ class Listing < ActiveRecord::Base
 
   def monthly_pmt(user)
     monthly_pmt = zillow_mortgage_api(user)["monthlyPrincipalAndInterest"]
+    #make this an attribute
   end
 
   def rent_estimate

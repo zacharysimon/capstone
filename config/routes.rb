@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   get '/dashboards' => 'dashboards#index'
   get '/dashboards/edit' => 'dashboards#edit'
+  patch '/dashboards/update' => 'dashboards#update'
 
 
   namespace :api do
