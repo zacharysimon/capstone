@@ -14,33 +14,6 @@ module ListingsHelper
     }
   end
 
-  def zillow_mortgage_api(user)
-    if price != nil
-      if user
-        url = "http://www.zillow.com/webservice/GetMonthlyPayments.htm?zws-id=X1-ZWz19ytk7im2ob_728x4&price=#{price}&down=#{user.percent_down_pmt.to_i}"
-      else
-        # defaults to 20% downpayment
-        url = "http://www.zillow.com/webservice/GetMonthlyPayments.htm?zws-id=X1-ZWz19ytk7im2ob_728x4&price=#{price}&down=20"
-      end
-    # if there is no price, defaults to $100,000
-    else
-      url = "http://www.zillow.com/webservice/GetMonthlyPayments.htm?zws-id=X1-ZWz19ytk7im2ob_728x4&price=100000&down=20"
-    end
-
-    response = HTTParty.get(url)
-
-    if user.loan_type == 30
-      return response.parsed_response["paymentsSummary"]["response"]["payment"][0]
-    else 
-      #sets default loan type to 15 yr fixed if a user isn't logged in
-      return response.parsed_response["paymentsSummary"]["response"]["payment"][1]
-    end
-  end
-
-  def monthly_pmt(user)
-    monthly_pmt = zillow_mortgage_api(user)["monthlyPrincipalAndInterest"]
-  end
-
   def zillow_get_deep_search_results(params)
 
     input_street_address = params[:address]
@@ -49,7 +22,10 @@ module ListingsHelper
 
     response = HTTParty.get("http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=X1-ZWz19ytk7im2ob_728x4&address=#{input_street_address}&citystatezip=#{input_city},#{input_state}")
 
-    if response.parsed_response["searchresults"]["message"]["code"] != "508"
+    check_for_error = response.parsed_response["searchresults"]["message"]["code"]
+
+    if check_for_error != "508" && check_for_error != "501"
+        
         if response.parsed_response["searchresults"]["response"]["results"]["result"].length > 1
             zillow_response = response.parsed_response["searchresults"]["response"]["results"]["result"][0]
         else
@@ -67,6 +43,18 @@ module ListingsHelper
         bathrooms = zillow_response["bathrooms"]
         bedrooms = zillow_response["bedrooms"]
         sqft = zillow_response["finishedSqFt"]
+    else 
+        zpid = nil
+        latitude = nil
+        longitude = nil
+        price = nil
+        address = nil
+        city = nil
+        zipcode = nil
+        state = nil
+        bathrooms = nil
+        bedrooms = nil
+        sqft = nil
     end
 
   {
@@ -85,7 +73,6 @@ module ListingsHelper
   end
 
   def calulate_default_values(params)
-    monthly_debt_service = monthly_pmt(params)
     zillow = zillow_get_deep_search_results(params)
     walk_score = walk_score_api(zillow[:latitude], zillow[:longitude])
 
@@ -122,13 +109,15 @@ module ListingsHelper
     if params[:bedrooms] != nil 
         bedrooms = params[:bedrooms]
     elsif zillow[:bedrooms] != nil
-        bedrooms = 0
-    else bedrooms = zillow[:bedrooms]
+        bedrooms = zillow[:bedrooms]
+    else bedrooms = 0
     end 
 
-    if zillow[:bathrooms] == nil
-        bathrooms = 0
-    else bathrooms = zillow[:bathrooms]
+    if params[:bathrooms] != nil
+        bathrooms = params[:bathrooms]
+    elsif zillow[:bathrooms] != nil
+        bathrooms = zillow[:bathrooms]
+    else bathrooms = params[:bathrooms]
     end
 
     if walk_score[:walk_score] == nil
