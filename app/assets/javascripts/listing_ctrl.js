@@ -28,10 +28,18 @@
       }
     });
       
+     // Model to JSON for demo purpose
+    $scope.$watch('models', function(model) {
+      $scope.modelAsJson = angular.toJson(model, true);
+    }, true);
 
+    $scope.updateDashboard = function() {
+      for (var i = 0; i < $scope.models.lists.Visible.length; i++) {
+        
+      }
 
-
-
+      console.log($scope.models.lists.Visible);
+    };
 
     window.$scope = $scope;
     

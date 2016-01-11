@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160110163206) do
+ActiveRecord::Schema.define(version: 20160111152432) do
 
   create_table "characteristics", force: :cascade do |t|
     t.text "attribute_column_name", limit: 65535
@@ -36,26 +36,27 @@ ActiveRecord::Schema.define(version: 20160110163206) do
   end
 
   create_table "listings", force: :cascade do |t|
-    t.text     "address",        limit: 65535
-    t.string   "zip_code",       limit: 255
-    t.string   "city",           limit: 255
-    t.string   "state",          limit: 255
-    t.float    "latitude",       limit: 24
-    t.float    "longitude",      limit: 24
-    t.string   "walk_score",     limit: 255
-    t.string   "transit_score",  limit: 255
-    t.integer  "rent_estimate",  limit: 4
-    t.integer  "tax_assessment", limit: 4
-    t.integer  "sqft",           limit: 4
-    t.integer  "bathrooms",      limit: 4
-    t.integer  "bedrooms",       limit: 4
-    t.integer  "zpid",           limit: 4
-    t.integer  "price",          limit: 4
-    t.integer  "zws_id",         limit: 4
-    t.integer  "hoa_assessment", limit: 4
-    t.integer  "user_id",        limit: 4
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.text     "address",              limit: 65535
+    t.string   "zip_code",             limit: 255
+    t.string   "city",                 limit: 255
+    t.string   "state",                limit: 255
+    t.float    "latitude",             limit: 24
+    t.float    "longitude",            limit: 24
+    t.string   "walk_score",           limit: 255
+    t.string   "transit_score",        limit: 255
+    t.integer  "rent_estimate",        limit: 4
+    t.integer  "tax_assessment",       limit: 4
+    t.integer  "sqft",                 limit: 4
+    t.integer  "bathrooms",            limit: 4
+    t.integer  "bedrooms",             limit: 4
+    t.integer  "zpid",                 limit: 4
+    t.integer  "price",                limit: 4
+    t.integer  "zws_id",               limit: 4
+    t.integer  "hoa_assessment",       limit: 4
+    t.integer  "user_id",              limit: 4
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.integer  "monthly_debt_service", limit: 4
   end
 
   create_table "users", force: :cascade do |t|

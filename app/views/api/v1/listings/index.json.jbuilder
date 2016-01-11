@@ -14,6 +14,7 @@ json.listings do
     json.hoa_assessment listing.hoa_assessment
     # json.debt_service listing.monthly_pmt(current_user)
     json.cost_per_sqft listing.cost_per_sqft
+    json.rent_estimate listing.rent_estimate
     json.dashboard @dashboard do |heading|
       
       if !heading.nil?

@@ -14,6 +14,33 @@ module ListingsHelper
     }
   end
 
+  def zillow_mortgage_api(user)
+    if price != nil
+      if user
+        url = "http://www.zillow.com/webservice/GetMonthlyPayments.htm?zws-id=X1-ZWz19ytk7im2ob_728x4&price=#{price}&down=#{user.percent_down_pmt.to_i}"
+      else
+        # defaults to 20% downpayment
+        url = "http://www.zillow.com/webservice/GetMonthlyPayments.htm?zws-id=X1-ZWz19ytk7im2ob_728x4&price=#{price}&down=20"
+      end
+    # if there is no price, defaults to $100,000
+    else
+      url = "http://www.zillow.com/webservice/GetMonthlyPayments.htm?zws-id=X1-ZWz19ytk7im2ob_728x4&price=100000&down=20"
+    end
+
+    response = HTTParty.get(url)
+
+    if user.loan_type == 30
+      return response.parsed_response["paymentsSummary"]["response"]["payment"][0]
+    else 
+      #sets default loan type to 15 yr fixed if a user isn't logged in
+      return response.parsed_response["paymentsSummary"]["response"]["payment"][1]
+    end
+  end
+
+  def monthly_pmt(user)
+    monthly_pmt = zillow_mortgage_api(user)["monthlyPrincipalAndInterest"]
+  end
+
   def zillow_get_deep_search_results(params)
 
     input_street_address = params[:address]
@@ -58,7 +85,7 @@ module ListingsHelper
   end
 
   def calulate_default_values(params)
-
+    monthly_debt_service = monthly_pmt(params)
     zillow = zillow_get_deep_search_results(params)
     walk_score = walk_score_api(zillow[:latitude], zillow[:longitude])
 
@@ -105,12 +132,12 @@ module ListingsHelper
     end
 
     if walk_score[:walk_score] == nil
-        walk_score = 0
+        walk_score = 1
     else walk_score = walk_score[:walk_score]
     end
 
     if zillow[:sqft] == nil
-        sqft = 0
+        sqft = 1
     else sqft = zillow[:sqft]    
     end
 
@@ -119,7 +146,7 @@ module ListingsHelper
     else zipcode = zillow[:zipcode]
     end 
     if zillow[:price] == nil && params["price"] == ""
-        price = 0
+        price = 1
     elsif params["price"] != ""
         price = params["price"]
     else price = zillow[:price]
@@ -132,7 +159,7 @@ module ListingsHelper
         hoa_assessment = price * 0.0015
     else hoa_assessment = params[:hoa_assessment]
     end
-    #add monthly payment here
+    monthly_debt_service = 
 
 
     {

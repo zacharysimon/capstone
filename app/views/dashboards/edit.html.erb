@@ -1,8 +1,7 @@
 <div ng-app="app">
   <div ng-controller="listingCtrl">
 
-<%= form_tag "/dashboards", method: :patch do %>
-  <%= button_tag 'Update', class: "btn btn-default pull-right" %>
+    <button ng-click="updateDashboard()">Update</button>
 
     <div class="container simpleDemo">
       <div class="col-md-12">
@@ -23,7 +22,6 @@
                      dnd-selected="models.selected = item"
                      ng-class="{'selected': models.selected === item}">
                      {{item.label}}
-
                    </li>
                  </ol>
                </div>
@@ -32,7 +30,6 @@
          </div>
        </div>
      </div>
-<% end %>
    </div>
  </div>
 
