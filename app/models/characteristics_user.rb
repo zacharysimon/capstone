@@ -4,4 +4,7 @@ class CharacteristicsUser < ActiveRecord::Base
   belongs_to :characteristic
   
 
+  
+
+  
 end

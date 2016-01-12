@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       get '/listings' => 'listings#index'
       get '/dashboard' => 'listings#dashboard'
-      post '/dashboard' => 'listings#save'
+      patch '/dashboard' => 'listings#update'
     end
   end
 

@@ -21,9 +21,9 @@
 
       for (var i = 0; i < $scope.allHeadings.length; i++) {
         if ($scope.allHeadings[i].visible === true ) {
-          $scope.models.lists.Visible.push({label: $scope.allHeadings[i].header_title});
+          $scope.models.lists.Visible.push({label: $scope.allHeadings[i].header_title, id: $scope.allHeadings[i].characteristic_id, visible: ""});
         } else {
-          $scope.models.lists.Hidden.push({label: $scope.allHeadings[i].header_title});
+          $scope.models.lists.Hidden.push({label: $scope.allHeadings[i].header_title, id: $scope.allHeadings[i].characteristic_id, visible: ""});
         }
       }
     });
@@ -33,12 +33,33 @@
       $scope.modelAsJson = angular.toJson(model, true);
     }, true);
 
-    $scope.updateDashboard = function() {
-      for (var i = 0; i < $scope.models.lists.Visible.length; i++) {
-        
+
+    $scope.updateDashboard = function(inputs, user) {
+
+
+      var lists = [];
+      var data = [{"lists": lists}, {"user": user}];
+
+      for (var i = 0; i < inputs.models.lists.Visible.length; i++) {
+        inputs.models.lists.Visible[i]["visible"] = "true";
+        lists.push(inputs.models.lists.Visible[i]);
       }
 
-      console.log($scope.models.lists.Visible);
+      for (var i = 0; i < inputs.models.lists.Hidden.length; i++) {
+        inputs.models.lists.Hidden[i]["visible"] = "false";
+        lists.push(inputs.models.lists.Hidden[i]);
+      }
+
+      $http.patch("/api/v1/dashboard.json", data).then(function(response) {
+        console.log(response);
+      }, function(error) {
+        console.log(error);
+        $scope.errors = error.data.errors;
+      });
+          
+
+      console.log(lists);
+      console.log(inputs);
     };
 
     window.$scope = $scope;

@@ -1,7 +1,7 @@
 <div ng-app="app">
   <div ng-controller="listingCtrl">
 
-    <button ng-click="updateDashboard()">Update</button>
+    <button ng-click="updateDashboard(this, <%= current_user.id %>)">Update</button>
 
     <div class="container simpleDemo">
       <div class="col-md-12">

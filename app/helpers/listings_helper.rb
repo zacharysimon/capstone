@@ -25,7 +25,7 @@ module ListingsHelper
     check_for_error = response.parsed_response["searchresults"]["message"]["code"]
 
     if check_for_error != "508" && check_for_error != "501"
-        
+
         if response.parsed_response["searchresults"]["response"]["results"]["result"].length > 1
             zillow_response = response.parsed_response["searchresults"]["response"]["results"]["result"][0]
         else
@@ -43,18 +43,6 @@ module ListingsHelper
         bathrooms = zillow_response["bathrooms"]
         bedrooms = zillow_response["bedrooms"]
         sqft = zillow_response["finishedSqFt"]
-    else 
-        zpid = nil
-        latitude = nil
-        longitude = nil
-        price = nil
-        address = nil
-        city = nil
-        zipcode = nil
-        state = nil
-        bathrooms = nil
-        bedrooms = nil
-        sqft = nil
     end
 
   {
