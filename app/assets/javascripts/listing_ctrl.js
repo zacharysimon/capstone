@@ -38,7 +38,7 @@
 
 
       var lists = [];
-      var data = [{"lists": lists}, {"user": user}];
+      var data = {"data": {"lists": lists, "user": user}};
 
       for (var i = 0; i < inputs.models.lists.Visible.length; i++) {
         inputs.models.lists.Visible[i]["visible"] = "true";
