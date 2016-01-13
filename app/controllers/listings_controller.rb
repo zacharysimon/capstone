@@ -1,7 +1,25 @@
 class ListingsController < ApplicationController
   include ListingsHelper
   include HTTParty 
-   
+  
+  def home 
+    if current_user
+      unless CharacteristicsUser.where(user_id: current_user.id).exists? 
+        i = 1
+        vis = true
+        Characteristic.all.each do |char|
+          CharacteristicsUser.create(
+            user_id: current_user.id,
+            characteristic_id: char.id,
+            order: i,
+            visible: vis,
+            )
+          i += 1
+          vis = !vis
+        end
+      end
+    end
+  end 
 
   def index
     @listings = current_user.listings.all

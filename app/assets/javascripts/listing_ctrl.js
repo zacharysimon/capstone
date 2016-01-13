@@ -35,8 +35,6 @@
 
 
     $scope.updateDashboard = function(inputs, user) {
-
-
       var lists = [];
       var data = {"data": {"lists": lists, "user": user}};
 
@@ -61,6 +59,7 @@
       console.log(lists);
       console.log(inputs);
     };
+
 
     window.$scope = $scope;
     
