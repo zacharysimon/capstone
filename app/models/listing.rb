@@ -42,6 +42,38 @@ class Listing < ActiveRecord::Base
     end
   end
 
+  def neighborhood_score
+    check = Comment.find_by(listing_id: id, comment_type: "neighborhood")
+    if check
+      return check.score
+    else return 5
+    end
+  end
+
+  def building_score
+    check = Comment.find_by(listing_id: id, comment_type: "building")
+    if check
+      return check.score
+    else return 5
+    end
+  end
+
+  def layout_score
+    check = Comment.find_by(listing_id: id, comment_type: "layout")
+    if check
+      return check.score
+    else return 5
+    end
+  end
+
+  def amenities_score
+    check = Comment.find_by(listing_id: id, comment_type: "amenities")
+    if check
+      return check.score
+    else return 5
+    end
+  end
+
   def rent_estimate
     if read_attribute(:rent_estimate) == nil
       return 0.008 * price 

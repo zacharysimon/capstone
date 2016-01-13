@@ -67,10 +67,32 @@ class ListingsController < ApplicationController
   end
 
   def edit
+    if current_user
+      @listing = Listing.find_by(id: params[:id])
+    end
   end
 
-
   def update
+    if current_user
+      @listing = Listing.find_by(id: params[:id])
+      if @listing.update(
+        address: params[:input_address],
+        city: params[:input_city],
+        state: params[:input_state],
+        price: params[:input_price],
+        bathrooms: params[:input_bathrooms],
+        bedrooms: params[:input_bedrooms],
+        sqft: params[:input_sqft],
+        hoa_assessment: params[:input_hoa_assessment],
+        tax_assessment: params[:input_tax_assessment],
+        walk_score: params[:input_walk_score],
+        )
+       flash[:success] = "Listing was successfully updated!"
+       redirect_to "/listings/#{@listing.id}"
+      else 
+        render :edit
+      end
+    end
   end
 
   def destroy

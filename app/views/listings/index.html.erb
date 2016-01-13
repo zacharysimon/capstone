@@ -24,7 +24,7 @@
                 <tbody>
                     <tr ng-repeat="listing in listings">
                         <td ng-repeat="dashboard in listing.dashboard">
-                            {{dashboard.attribute_value}}
+                            <a href='listings/{{listing.id}}'>{{dashboard.attribute_value}}</a>
                         </td>
                     </tr>
                 </tbody>

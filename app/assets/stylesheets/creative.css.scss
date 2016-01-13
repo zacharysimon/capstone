@@ -58,7 +58,7 @@ p {
 }
 
 section {
-    padding: 100px 0;
+    padding: 50px 0;
 }
 
 aside {
@@ -69,25 +69,28 @@ aside {
     padding: 0;
 }
 
-
-header {
+// this used to say just "header" but i changed it to target what i want
+.bg-primary {
     position: relative;
     width: 100%;
+    padding: 15% 0;
     min-height: auto;
     text-align: center;
     color: #fff;
-    background-image: url(../images/house1.jpg);
+    background-image: image-url("house1.jpg");
     background-position: center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
 }
-
+.header-text {
+    background-color: black;
+}
 header .header-content {
     position: relative;
     width: 100%;
-    padding: 100px 15px;
+    padding: 50px 15px 10px 15px;
     text-align: center;
 }
 
@@ -117,7 +120,7 @@ header .header-content .header-content-inner p {
     header .header-content {
         position: absolute;
         top: 50%;
-        padding: 0 50px;
+        padding: 0 20px;
         -webkit-transform: translateY(-50%);
         -ms-transform: translateY(-50%);
         transform: translateY(-50%);

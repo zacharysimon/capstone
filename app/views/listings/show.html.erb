@@ -17,9 +17,8 @@
       <p>Monthly HOA Fees: <%= @listing.hoa_assessment %></p>
       <p>Annual Property Tax: <%= @listing.tax_assessment %></p>
     </div>
-
   </div>
-
+<%= link_to "Edit this listing", "/listings/#{@listing.id}/edit" %>
 
   <div class = "comments container">
     <div class = "container">
@@ -41,7 +40,7 @@
         <%= button_tag 'Create', class: "btn btn-default" %> 
      <% end %>
     </div>  
-
+    
     <div class = "row">
       <% @listing.comments.each do |comment| %>
         <div class = "col-md-4">
@@ -52,4 +51,5 @@
       <% end %>
     </div>
   </div>
+
 </div>

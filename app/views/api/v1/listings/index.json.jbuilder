@@ -1,5 +1,6 @@
 json.listings do
   json.array! @listings do |listing|
+    json.id listing.id
     json.address listing.address
     json.zip_code listing.zip_code
     json.city listing.city
@@ -15,14 +16,14 @@ json.listings do
     # json.debt_service listing.monthly_pmt(current_user)
     json.cost_per_sqft listing.cost_per_sqft
     json.rent_estimate listing.rent_estimate
+
     json.dashboard @dashboard do |heading|
-      
       if !heading.nil?
-        json.attribute_value listing[heading.characteristic.attribute_column_name]
+        json.attribute_value listing.send(heading.characteristic.attribute_column_name)
         json.view_name heading.characteristic.attribute_view_name
       end
-      
     end
+
   end
 end
 
