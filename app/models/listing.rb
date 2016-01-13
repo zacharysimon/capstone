@@ -46,7 +46,7 @@ class Listing < ActiveRecord::Base
     check = Comment.find_by(listing_id: id, comment_type: "neighborhood")
     if check
       return check.score
-    else return 5
+    else return ""
     end
   end
 
@@ -54,7 +54,7 @@ class Listing < ActiveRecord::Base
     check = Comment.find_by(listing_id: id, comment_type: "building")
     if check
       return check.score
-    else return 5
+    else return ""
     end
   end
 
@@ -62,7 +62,7 @@ class Listing < ActiveRecord::Base
     check = Comment.find_by(listing_id: id, comment_type: "layout")
     if check
       return check.score
-    else return 5
+    else return ""
     end
   end
 
@@ -70,7 +70,7 @@ class Listing < ActiveRecord::Base
     check = Comment.find_by(listing_id: id, comment_type: "amenities")
     if check
       return check.score
-    else return 5
+    else return ""
     end
   end
 

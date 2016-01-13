@@ -9,7 +9,8 @@
 
 hr {
     max-width: 50px;
-    border-color: #f05f40;
+    // border-color: #f05f40;
+    border-color: #319CA5;
     border-width: 3px;
 }
 
@@ -18,7 +19,8 @@ hr.light {
 }
 
 a {
-    color: #f05f40;
+    // color: #f05f40;
+    color: #319CA5;
     -webkit-transition: all .35s;
     -moz-transition: all .35s;
     transition: all .35s;
@@ -45,7 +47,8 @@ p {
 }
 
 .bg-primary {
-    background-color: #f05f40;
+    // background-color: #f05f40;
+    background-color: #319CA5;
 }
 
 .bg-dark {
@@ -85,7 +88,7 @@ aside {
     -o-background-size: cover;
 }
 .header-text {
-    background-color: black;
+    background-color: #052B44;
 }
 header .header-content {
     position: relative;
@@ -165,7 +168,8 @@ header .header-content .header-content-inner p {
 }
 
 .text-primary {
-    color: #f05f40;
+    // color: #f05f40;
+    color: #319CA5;
 }
 
 .no-gutter > [class*=col-] {
@@ -227,9 +231,11 @@ fieldset[disabled] .btn-default.active {
 }
 
 .btn-primary {
-    border-color: #f05f40;
+    // border-color: #f05f40;
+    border-color: #319CA5;
     color: #fff;
-    background-color: #f05f40;
+    // background-color: #f05f40;
+    background-color: #319CA5;
     -webkit-transition: all .35s;
     -moz-transition: all .35s;
     transition: all .35s;
@@ -275,7 +281,8 @@ fieldset[disabled] .btn-primary.active {
 }
 
 .btn-primary .badge {
-    color: #f05f40;
+    // color: #f05f40;
+    color: #319CA5;
     background-color: #fff;
 }
 

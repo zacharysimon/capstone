@@ -1,0 +1,20 @@
+<div class = "container">
+  <h1><%= @listing.address %></h1>
+  <h2><%= @listing.city %>, <%= @listing.state %>
+
+  <div class = "well comments container">
+    <div class = "row">
+      <% @listing.comments.each do |comment| %>
+        <div class = "col-md-4">
+          <%= form_tag "/comments/#{comment.id}", method: :patch do %>
+          <%= text_field_tag(:input_comment_type, comment.comment_type, {class: "form-control", placeholder: "Comment Type"})%>
+          <%= text_field_tag(:input_score, comment.score, {class: "form-control", placeholder: "Score"})%>
+          <%= text_field_tag(:input_comment, comment.comment, {class: "form-control", placeholder: "Comment"})%>
+          <%= hidden_field_tag(:input_comment_id, comment.id) %>
+          <%= button_tag 'Update', class: "btn btn-default" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
