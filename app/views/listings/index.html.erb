@@ -8,7 +8,7 @@
                 </div>
             </div>
             <div class="col-sm-3 wrench">
-                <a href="#">
+                <a href="/dashboards/edit">
                     <i class="fa fa-wrench"></i>
                 </a>
             </div>
@@ -17,30 +17,16 @@
     <div class="table table-bordered table-striped">
             <table class="table">
                 <thead>
-                    <tr>
-                        <th>Address</th>
-                        <th>Price</th>
-                        <th>Sq Ft</th>
-                        <th>Cost / SqFt</th>
-                        <th>Monthly Debt Service</th>
-                        <th>Walk Score</th>
-                        <th>Amenities Score</th>
-                        <th>Building Score</th>
+                    <tr> 
+                        <th ng-repeat="header in headings">{{header.header_title}}</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <% @listings.each do |listing| %>
-                    <tr>
-                        <td><a href="/listings/<%= listing.id %>"><%= listing.address %></a></td>
-                        <td><%= listing.price %></td>
-                        <td><%= listing.sqft %></td>
-                        <td><%= listing.cost_per_sqft %></td>
-                        <td><%=listing.monthly_pmt(current_user) %></td>
-                        <td><%= listing.walk_score %></td>
-                        <td> listing.comments.find_by(comment_type: "amenities").score</td>
-                        <td>FIX</td>
+                    <tr ng-repeat="listing in listings">
+                        <td ng-repeat="dashboard in listing.dashboard">
+                            <a href='listings/{{listing.id}}'>{{dashboard.attribute_value}}</a>
+                        </td>
                     </tr>
-                    <% end %>
                 </tbody>
             </table>
      </div>

@@ -4,7 +4,7 @@ class Listing < ActiveRecord::Base
   belongs_to :user
   has_many :comments 
 
- 
+   
 
   def zillow_mortgage_api(user)
     if price != nil
@@ -27,9 +27,13 @@ class Listing < ActiveRecord::Base
       #sets default loan type to 15 yr fixed if a user isn't logged in
       return response.parsed_response["paymentsSummary"]["response"]["payment"][1]
     end
-
   end
 
+  def monthly_pmt(user)
+    monthly_pmt = zillow_mortgage_api(user)["monthlyPrincipalAndInterest"]
+  end
+
+   
   def cost_per_sqft
     if price && sqft 
       return price / sqft 
@@ -38,8 +42,36 @@ class Listing < ActiveRecord::Base
     end
   end
 
-  def monthly_pmt(user)
-    monthly_pmt = zillow_mortgage_api(user)["monthlyPrincipalAndInterest"]
+  def neighborhood_score
+    check = Comment.find_by(listing_id: id, comment_type: "neighborhood")
+    if check
+      return check.score
+    else return 5
+    end
+  end
+
+  def building_score
+    check = Comment.find_by(listing_id: id, comment_type: "building")
+    if check
+      return check.score
+    else return 5
+    end
+  end
+
+  def layout_score
+    check = Comment.find_by(listing_id: id, comment_type: "layout")
+    if check
+      return check.score
+    else return 5
+    end
+  end
+
+  def amenities_score
+    check = Comment.find_by(listing_id: id, comment_type: "amenities")
+    if check
+      return check.score
+    else return 5
+    end
   end
 
   def rent_estimate

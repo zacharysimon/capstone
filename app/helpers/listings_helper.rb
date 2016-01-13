@@ -22,7 +22,10 @@ module ListingsHelper
 
     response = HTTParty.get("http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=X1-ZWz19ytk7im2ob_728x4&address=#{input_street_address}&citystatezip=#{input_city},#{input_state}")
 
-    if response.parsed_response["searchresults"]["message"]["code"] != "508"
+    check_for_error = response.parsed_response["searchresults"]["message"]["code"]
+
+    if check_for_error != "508" && check_for_error != "501"
+
         if response.parsed_response["searchresults"]["response"]["results"]["result"].length > 1
             zillow_response = response.parsed_response["searchresults"]["response"]["results"]["result"][0]
         else
@@ -58,7 +61,6 @@ module ListingsHelper
   end
 
   def calulate_default_values(params)
-
     zillow = zillow_get_deep_search_results(params)
     walk_score = walk_score_api(zillow[:latitude], zillow[:longitude])
 
@@ -95,22 +97,24 @@ module ListingsHelper
     if params[:bedrooms] != nil 
         bedrooms = params[:bedrooms]
     elsif zillow[:bedrooms] != nil
-        bedrooms = 0
-    else bedrooms = zillow[:bedrooms]
+        bedrooms = zillow[:bedrooms]
+    else bedrooms = 0
     end 
 
-    if zillow[:bathrooms] == nil
-        bathrooms = 0
-    else bathrooms = zillow[:bathrooms]
+    if params[:bathrooms] != nil
+        bathrooms = params[:bathrooms]
+    elsif zillow[:bathrooms] != nil
+        bathrooms = zillow[:bathrooms]
+    else bathrooms = params[:bathrooms]
     end
 
     if walk_score[:walk_score] == nil
-        walk_score = 0
+        walk_score = 1
     else walk_score = walk_score[:walk_score]
     end
 
     if zillow[:sqft] == nil
-        sqft = 0
+        sqft = 1
     else sqft = zillow[:sqft]    
     end
 
@@ -119,7 +123,7 @@ module ListingsHelper
     else zipcode = zillow[:zipcode]
     end 
     if zillow[:price] == nil && params["price"] == ""
-        price = 0
+        price = 1
     elsif params["price"] != ""
         price = params["price"]
     else price = zillow[:price]
@@ -132,6 +136,7 @@ module ListingsHelper
         hoa_assessment = price * 0.0015
     else hoa_assessment = params[:hoa_assessment]
     end
+    monthly_debt_service = 
 
 
     {
@@ -148,7 +153,8 @@ module ListingsHelper
     sqft: sqft,
     tax_assessment: tax_assessment,
     hoa_assessment: hoa_assessment,
-    walk_score: walk_score
+    walk_score: walk_score,
+    #add monthly payment here
     }
 
   end

@@ -1,1 +1,60 @@
-edit.html.erb
+<div class = "container">
+  <%= form_tag "/listings/#{@listing.id}", method: :patch do %>
+
+  <h1><%= @listing.address %></h1>
+  <h2><%= @listing.city %>, <%= @listing.state %>
+
+  <div class = "container">
+    <div class = "form-group">
+      <%= label_tag :input_address %>
+      <%= text_field_tag(:input_address, @listing.address, {class: "form-control", placeholder: "Address"})%>
+    </div>
+    <div class = "form-group">
+      <%= label_tag :input_city %>
+      <%= text_field_tag(:input_city, @listing.city, {class: "form-control", placeholder: "City"})%>
+    </div>
+    <div class = "form-group">
+      <%= label_tag :input_state %>
+      <%= text_field_tag(:input_state, @listing.state, {class: "form-control", placeholder: "State"})%>
+    </div>
+    <div class = "form-group">
+      <%= label_tag :input_zip_code %>
+      <%= text_field_tag(:input_zip_code, @listing.zip_code, {class: "form-control", placeholder: "Zip Code"})%>
+    </div>
+    <div class = "form-group">
+      <%= label_tag :input_price %>
+      <%= text_field_tag(:input_price, @listing.price, {class: "form-control", placeholder: "Price"})%>
+    </div>
+    <div class = "form-group">
+      <%= label_tag :input_bedrooms %>
+      <%= text_field_tag(:input_bedrooms, @listing.bedrooms, {class: "form-control", placeholder: "Bedrooms"})%>
+    </div>
+    <div class = "form-group">
+      <%= label_tag :input_bathrooms %>
+      <%= text_field_tag(:input_bathrooms, @listing.bathrooms, {class: "form-control", placeholder: "Bathrooms"})%>
+    </div>
+    <div class = "form-group">
+      <%= label_tag :input_sqft %>
+      <%= text_field_tag(:input_sqft, @listing.sqft, {class: "form-control", placeholder: "Square Feet"})%>
+    </div>
+    <div class = "form-group">
+      <%= label_tag :input_walk_score %>
+      <%= text_field_tag(:input_walk_score, @listing.walk_score, {class: "form-control", placeholder: "Walk Score"})%>
+    </div>
+    <div class = "form-group">
+      <%= label_tag :input_transit_score %>
+      <%= text_field_tag(:input_transit_score, @listing.transit_score, {class: "form-control", placeholder: "Transit Score"})%>
+    </div>
+    <div class = "form-group">
+      <%= label_tag :input_hoa_assessment %>
+      <%= text_field_tag(:input_hoa_assessment, @listing.hoa_assessment, {class: "form-control", placeholder: "HOA Monthly Assessment"})%>
+    </div>
+    <div class = "form-group">
+      <%= label_tag :input_tax_assessment %>
+      <%= text_field_tag(:input_tax_assessment, @listing.tax_assessment, {class: "form-control", placeholder: "Tax Assessment"})%>
+    </div>
+    <%= button_tag 'Update', class: "btn btn-default" %>
+  </div>
+  <% end %>
+  </div>
+</div>
