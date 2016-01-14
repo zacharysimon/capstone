@@ -29,13 +29,18 @@
     });
       
     $scope.checkZillow = function(address, city, state) {
+      $scope.results = [];
+
       console.log(address, city, state);
       $http.get('/api/v1/listings/zillow_search?address=' + address + '&city=' + city + '&state=' + state).then(function(response) {
         $scope.initialResults = response.data["results"][0];
         console.log($scope.initialResults);
         console.log($scope.initialResults.length);
 
-        if ($scope.initialResults.length === undefined) {
+        // for this first condition figure out how to make it so it doesnt console log an error
+        if ($scope.initialResults === null) {
+          $scope.results = [];
+        } else if ($scope.initialResults.length === undefined) {
           $scope.results = [$scope.initialResults];
         } else {
           $scope.results = $scope.initialResults;
@@ -45,6 +50,16 @@
 
     $scope.selectListing = function(listing) {
       console.log(listing.result);
+
+      $scope.selectedListing = {
+        "price": listing.result.zestimate.amount.__content__,
+        "bedrooms": listing.result.bedrooms,
+        "bathrooms": listing.result.bathrooms,
+        "sqft": listing.result.finishedSqFt,
+        "hoa_assessment": listing.result.bedrooms,
+        "tax_assessment": listing.result.bedrooms
+      };
+      console.log($scope.selectedListing);
     };
 
 
