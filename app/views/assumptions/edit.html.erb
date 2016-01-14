@@ -4,8 +4,8 @@
   <%= button_tag 'Update', class: "btn btn-default pull-right" %>
   <div class = "well col-md-12">
     <h4>User info</h4>
-    <p>First Name: <%= current_user.first_name %> </p>
-    <p>Last Name: <%= current_user.last_name %> </p>
+    <p>First Name: <%= text_field_tag(:input_first_name, current_user.first_name )%> </p>
+    <p>Last Name: <%= text_field_tag(:input_last_name, current_user.last_name )%> </p>
     <p>Email: <%= current_user.email %> </p>
 
   </div>  

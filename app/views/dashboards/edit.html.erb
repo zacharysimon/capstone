@@ -4,9 +4,9 @@
     <a href='/listings'><button ng-click="updateDashboard(this, <%= current_user.id %>)">Update</button></a>
 
     <div class="container simpleDemo">
-      <div class="col-md-12">
-        <div class="row">
-          <div ng-repeat="(listName, list) in models.lists" class="col-md-4">
+      <div class="row">
+      <div class="col-md-12 dashboard-boxes">
+          <div ng-repeat="(listName, list) in models.lists" class="col-md-5">
             <div class="panel panel-info">
               <div class="panel-heading">
                 <h2 class="panel-title"> {{listName}}</h2>

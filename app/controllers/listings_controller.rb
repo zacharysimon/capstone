@@ -3,25 +3,29 @@ class ListingsController < ApplicationController
   include HTTParty 
   
   def home 
+
     if current_user
+      default_loan_type = 15
+      default_percent_down = 20.00
+
       unless CharacteristicsUser.where(user_id: current_user.id).exists? 
-        i = 1
-        vis = true
         Characteristic.all.each do |char|
           CharacteristicsUser.create(
             user_id: current_user.id,
             characteristic_id: char.id,
-            order: i,
-            visible: vis,
+            order: char.default_order,
+            visible: char.default_visible
             )
-          i += 1
-          vis = !vis
         end
+        current_user.update(
+          loan_type: default_loan_type,
+          percent_down_pmt: default_percent_down)
       end
     end
   end 
 
   def index
+    search = params[:search]
     @listings = current_user.listings.all
   end
 

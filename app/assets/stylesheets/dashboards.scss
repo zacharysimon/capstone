@@ -5,5 +5,15 @@
 
 .panel-title {
   text-align: center;
-  padding-bottom: 5px;
+  padding: 5px 0;
+  font-size: 20px;
+}
+
+// aligns the visible and hidden lists in the middle of the screen
+.dashboard-boxes {
+  padding-left: 15%;
+}
+
+.panel-info > .panel-heading {
+  background-color: white;
 }

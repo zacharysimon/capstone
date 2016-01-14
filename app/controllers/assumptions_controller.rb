@@ -12,6 +12,8 @@ class AssumptionsController < ApplicationController
 
   def update
     current_user.update(
+      first_name: params[:input_first_name],
+      last_name: params[:input_last_name],
       percent_down_pmt: params[:input_percent_down_pmt],
       loan_type: params[:input_loan_type],
       acquisition_costs: params[:input_acquisition_costs],
