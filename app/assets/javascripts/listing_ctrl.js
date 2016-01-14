@@ -28,11 +28,33 @@
       }
     });
       
+    $scope.checkZillow = function(address, city, state) {
+      console.log(address, city, state);
+      $http.get('/api/v1/listings/zillow_search?address=' + address + '&city=' + city + '&state=' + state).then(function(response) {
+        $scope.initialResults = response.data["results"][0];
+        console.log($scope.initialResults);
+        console.log($scope.initialResults.length);
+
+        if ($scope.initialResults.length === undefined) {
+          $scope.results = [$scope.initialResults];
+        } else {
+          $scope.results = $scope.initialResults;
+        }
+      });
+    };
+
+    $scope.selectListing = function(listing) {
+      console.log(listing.result);
+    };
+
+
+
+
+
      // Model to JSON for demo purpose
     $scope.$watch('models', function(model) {
       $scope.modelAsJson = angular.toJson(model, true);
     }, true);
-
 
     $scope.updateDashboard = function(inputs, user) {
       var lists = [];
@@ -59,7 +81,6 @@
       console.log(lists);
       console.log(inputs);
     };
-
 
     window.$scope = $scope;
     

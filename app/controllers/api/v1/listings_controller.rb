@@ -1,4 +1,5 @@
 class Api::V1::ListingsController < ApplicationController
+  include ListingsHelper
 
   def index
     if current_user
@@ -15,6 +16,16 @@ class Api::V1::ListingsController < ApplicationController
   
   def create
 
+  end
+
+  def zillow_search
+    response = zillow_search_helper(params)
+
+    hash_result = {
+        results: response
+      }
+
+    render json: hash_result
   end
 
   def update

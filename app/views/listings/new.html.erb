@@ -3,32 +3,43 @@
   <%= form_tag "/listings", method: :post do %>
   <div class = "well">
      <div>
-        <%= label_tag :address %> 
-        <%= text_field_tag(:address, nil, class: "form-control") %> 
-        <%= label_tag :city %> 
-        <%= text_field_tag(:city, nil, class: "form-control") %> 
-        <%= label_tag :state %> 
-        <%= text_field_tag(:state, nil, class: "form-control") %> 
+        <label for="address">Address</label>
+        <input type="text" name="address" id="address" class="form-control" ng-model="address">
+        <label for="city">City</label>
+        <input type="text" name="city" id="city" class="form-control" ng-model="city">
+        <label for="state">State</label>
+        <input type="text" name="state" id="state" class="form-control" ng-model="state">
+     </div>
+    
+     <a href="javascript:void(0)" ng-click="checkZillow(address, city, state)"> Find Listing</a>
+      <div class="row">
+       <div ng-repeat="result in results | limitTo: 6">
+        <div class="col-md-2 create_address" ng-click="selectListing(this)">
+          <p>{{result.address.street}}</p>
+          <p>{{result.address.city}}, {{result.address.state}}</p>
+        </div>
+      </div>
      </div>
   </div>
+
   <div class = "well">
     <div>
-      <%= label_tag :price %> 
-      <%= text_field_tag(:price, nil, class: "form-control") %> 
-      <%= label_tag :bedrooms %> 
-      <%= text_field_tag(:bedrooms, nil, class: "form-control") %> 
-      <%= label_tag :bathrooms %> 
-      <%= text_field_tag(:bathrooms, nil, class: "form-control") %> 
-      <%= label_tag :sqft %> 
-      <%= text_field_tag(:sqft, nil, class: "form-control") %> 
+      <label for="price">Price</label>
+      <input type="text" name="price" id="price" class="form-control" ng-model="price">
+      <label for="bedrooms">Bedrooms</label>
+      <input type="text" name="bedrooms" id="bedrooms" class="form-control" ng-model="bedrooms">
+      <label for="bathrooms">Bathrooms</label>
+      <input type="text" name="bathrooms" id="bathrooms" class="form-control" ng-model="bathrooms">
+      <label for="sqft">Sq Ft</label>
+      <input type="text" name="sqft" id="sqft" class="form-control" ng-model="sqft">
     </div>
   </div>
   <div class = "well">
     <div>
-      <%= label_tag :monthly_hoa_assessment %> 
-      <%= text_field_tag(:hoa_assessment, nil, class: "form-control") %> 
-      <%= label_tag :annual_property_tax %> 
-      <%= text_field_tag(:tax_assessment, nil, class: "form-control") %> 
+      <label for="hoa_assessment">Monthly HOA Assessment</label>
+      <input type="text" name="hoa_assessment" id="hoa_assessment" class="form-control" ng-model="hoa_assessment">
+      <label for="tax_assessment">Annual Tax Assessment</label>
+      <input type="text" name="tax_assessment" id="tax_assessment" class="form-control" ng-model="tax_assessment">
     </div>
   </div>
 

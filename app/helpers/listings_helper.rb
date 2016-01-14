@@ -14,6 +14,22 @@ module ListingsHelper
     }
   end
 
+  def zillow_search_helper(params)
+    input_address = params[:address]
+    input_city = params[:city]
+    input_state = params[:state]
+
+    response = HTTParty.get("http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=X1-ZWz19ytk7im2ob_728x4&address=#{input_address}&citystatezip=#{input_city},#{input_state}")
+
+     check_for_error = response.parsed_response["searchresults"]["message"]["code"]
+
+    if check_for_error != "508" && check_for_error != "501" && check_for_error != "500"
+        zillow_response = response.parsed_response["searchresults"]["response"]["results"]["result"]
+    end
+
+    [zillow_response]      
+  end
+
   def zillow_get_deep_search_results(params)
 
     input_street_address = params[:address]
@@ -24,7 +40,7 @@ module ListingsHelper
 
     check_for_error = response.parsed_response["searchresults"]["message"]["code"]
 
-    if check_for_error != "508" && check_for_error != "501"
+    if check_for_error != "508" && check_for_error != "501" && check_for_error != "500"
 
         if response.parsed_response["searchresults"]["response"]["results"]["result"].length > 1
             zillow_response = response.parsed_response["searchresults"]["response"]["results"]["result"][0]
@@ -158,8 +174,6 @@ module ListingsHelper
     }
 
   end
-
-   
 
 
 end

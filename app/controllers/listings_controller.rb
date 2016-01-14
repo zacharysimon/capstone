@@ -56,7 +56,7 @@ class ListingsController < ApplicationController
 
     if @listing.save 
       flash[:success] = "Listing successfully created!"
-      redirect_to "/listings"
+      redirect_to "/listings/#{@listing.id}/edit"
     end
 
   end
