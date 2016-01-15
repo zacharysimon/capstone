@@ -1,25 +1,30 @@
 <div class = "show-listing container">
-    <div class=" show-listing-edit pull-right">
+
+    <div class="row show-listing-edit pull-right">
       <div class="ibox-title pull-right">
         <a href="/assumptions/edit">
-          <i class="fa fa-wrench"></i>
+          <i class="fa fa-wrench fa-2x"></i>
         </a>
       </div>
     </div>
     
-  <div class = "row">
+  <div class = "row assumptions-wells">
+  
+      <div class = "well col-md-6 assumptions-info">
+        <h4>User info</h4>
+        <p>First Name: <%= current_user.first_name %> </p>
+        <p>Last Name: <%= current_user.last_name %> </p>
+        <p>Email: <%= current_user.email %> </p>
+      </div>  
+      <div class = "well col-md-6 assumptions-info">
+        <h4>Mortgage Assumptions</h4>
+        <p>Percent Down Payment: <%= current_user.percent_down_pmt %>% </p>
+        <p>Loan Type: <%= current_user.loan_type %> year fixed rate</p>
+      </div> 
+     
+  </div>
+</div>
 
-    <div class = "well col-md-12">
-      <h4>User info</h4>
-      <p>First Name: <%= current_user.first_name %> </p>
-      <p>Last Name: <%= current_user.last_name %> </p>
-      <p>Email: <%= current_user.email %> </p>
-    </div>  
-    <div class = "well col-md-12">
-      <h4>Mortgage Assumptions</h4>
-      <p>Percent Down Payment: <%= current_user.percent_down_pmt %>% </p>
-      <p>Loan Type: <%= current_user.loan_type %> year fixed rate</p>
-    </div>  
     <!-- <div class = "well col-md-12">
       <h4>Rent vs. Buy Assumptions</h4>
       <p>Acquisition Costs: <%= current_user.acquisition_costs %>% </p>
@@ -31,5 +36,3 @@
       <p>Property Appreciation: <%= current_user.property_appreciation %> </p>
       <p>Income tax rate: <%= current_user.income_tax_rate %> </p>
     </div> -->
-  </div>
-</div>

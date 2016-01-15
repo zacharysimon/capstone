@@ -89,6 +89,12 @@
       $scope.selectedZpid = $scope.selectedListing.zpid;
       $scope.selectedZipCode = $scope.selectedListing.zip_code;
 
+      if (listing.result.address.street !== "No existing listings found. Click here to manually enter data.") {
+        $scope.address = listing.result.address.street;
+        $scope.city = listing.result.address.city;
+        $scope.state = listing.result.address.state;
+      }
+
     };
 
     $scope.createListing = function() {

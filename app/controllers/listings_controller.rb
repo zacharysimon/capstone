@@ -36,6 +36,7 @@ class ListingsController < ApplicationController
   def create
 
     input_walk_score = walk_score_api(params[:latitude], params[:longitude])
+    monthly_pmt = zillow_mortgage_helper(params["price"], params["user_id"])
 
     @listing = Listing.new(
       user_id: params["user_id"],
@@ -52,7 +53,8 @@ class ListingsController < ApplicationController
       sqft: params["sqft"],
       hoa_assessment: params["hoa_assessment"],
       tax_assessment: params["tax_assessment"],
-      walk_score: input_walk_score[:walk_score]
+      walk_score: input_walk_score[:walk_score],
+      monthly_debt_service: monthly_pmt[:monthly_pmt]
       )
 
 
