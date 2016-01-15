@@ -46,7 +46,7 @@ class ListingsController < ApplicationController
       longitude: params["longitude"],
       price: params["price"],
       zpid: params["zpid"],
-      zip_code: params["zipcode"],
+      zip_code: params["zip_code"],
       bathrooms: params["bathrooms"],
       bedrooms: params["bedrooms"],
       sqft: params["sqft"],

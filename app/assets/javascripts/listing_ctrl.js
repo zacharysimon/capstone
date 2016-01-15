@@ -35,6 +35,8 @@
       
     $scope.checkZillow = function(address, city, state) {
       $scope.results = [];
+      $scope.showZillow = true;
+
 
       console.log(address, city, state);
       $http.get('/api/v1/listings/zillow_search?address=' + address + '&city=' + city + '&state=' + state).then(function(response) {
@@ -44,7 +46,7 @@
 
         // for this first condition figure out how to make it so it doesnt console log an error
         if ($scope.initialResults === null) {
-          $scope.results = [];
+          $scope.results = $scope.initialResults;
         } else if ($scope.initialResults.length === undefined) {
           $scope.results = [$scope.initialResults];
         } else {
@@ -53,8 +55,11 @@
       });
     };
 
+
     $scope.selectListing = function(listing) {
       console.log(listing.result);
+      $scope.showProperties = true;
+      $scope.createListingButton = true;
 
       $scope.selectedListing = {
         "price": listing.result.zestimate.amount.__content__,
@@ -72,25 +77,43 @@
         "city": listing.result.address.city,
         "state": listing.result.address.state
       };
-      
+    
       $scope.selectedPrice = $scope.selectedListing.price;
       $scope.selectedBathrooms = $scope.selectedListing.bathrooms;
       $scope.selectedBedrooms = $scope.selectedListing.bedrooms;
-      $scope.selectedSqFt = $scope.selectedListing.Sqft;
+      $scope.selectedSqft = $scope.selectedListing.Sqft;
       $scope.selectedHoa = $scope.selectedListing.hoa_assessment;
       $scope.selectedTax = $scope.selectedListing.tax_assessment;
       $scope.selectedLongitude = $scope.selectedListing.longitude;
       $scope.selectedLatitude = $scope.selectedListing.latitude;
       $scope.selectedZpid = $scope.selectedListing.zpid;
+      $scope.selectedZipCode = $scope.selectedListing.zip_code;
 
     };
 
-
     $scope.createListing = function() {
-      $http.post('/listings', $scope.selectedListing).then(function() {
+      $http.post('/listings', {
+        "price": $scope.selectedPrice,
+        "bedrooms": $scope.selectedBedrooms,
+        "bathrooms": $scope.selectedBathrooms,
+        "sqft": $scope.selectedSqft,
+        "hoa_assessment": $scope.selectedHoa,
+        "tax_assessment": $scope.selectedTax,
+        "longitude": $scope.selectedListing.longitude,
+        "latitude": $scope.selectedLatitude,
+        "zip_code": $scope.selectedZipCode,
+        "zpid": $scope.selectedZpid,
+        "user_id": $scope.currentUserId,
+        "address": $scope.address,
+        "city": $scope.city,
+        "state": $scope.state
+      }).then(function() {
         window.location.href = '/listings';
       });
     };
+
+
+
 
      // Model to JSON for demo purpose
     $scope.$watch('models', function(model) {
