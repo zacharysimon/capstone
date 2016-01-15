@@ -2,7 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
+.dashboard-container {
+  padding-top: 30px;
+}
 .panel-title {
   text-align: center;
   padding: 5px 0;
@@ -17,9 +19,30 @@
 .dashboard-address {
   margin-top: 15px;
 }
+.dashboard-text p {
+  display: none;
+  padding-right: 10px;
+}
+
+.dashboard-text {
+  margin-left: 40px;
+}
+
+.dashboard-text:hover {
+  p {
+    display: inline;
+  }
+  a {
+    color: #727271;
+  }
+}
 
 .panel-info > .panel-heading {
   background-color: white;
-  border-color: #052B44;
-  border: 1px solid;
+  border-color: white;
+  color: black;
+}
+
+.dashboard-save {
+  color: #727271
 }

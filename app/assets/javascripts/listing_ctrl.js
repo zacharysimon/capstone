@@ -118,17 +118,6 @@
       });
     };
 
-    $scope.updateAssumptions = function() {
-      $http.post('/assumptions', {
-        "input_first_name": $scope.firstName,
-        "input_last_name": $scope.lastName,
-        "input_percent_down_pmt": $scope.percentDown,
-        "input_loan_type": $scope.loanType,
-        "user_id": $scope.currentUserId
-      }).then(function() {
-        window.location.href = "/listings";
-      });
-    };
 
 
      // Model to JSON for demo purpose
