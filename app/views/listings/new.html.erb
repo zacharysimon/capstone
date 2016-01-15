@@ -1,6 +1,6 @@
 <div class = "container">
 
-  <%= form_tag "/listings", method: :post do %>
+
   <div class = "well">
      <div>
         <label for="address">Address</label>
@@ -11,7 +11,8 @@
         <input type="text" name="state" id="state" class="form-control" ng-model="state">
      </div>
     
-     <a href="javascript:void(0)" ng-click="checkZillow(address, city, state)"> Find Listing</a>
+     <a href="javascript:void(0)" ng-click="checkZillow(address, city, state)"> Next</a>
+  
       <div class="row">
        <div ng-repeat="result in results | limitTo: 6">
         <div class="col-md-2 create_address" ng-click="selectListing(this)">
@@ -25,27 +26,28 @@
   <div class = "well">
     <div>
       <label for="price">Price</label>
-      <input ng-model="price" type="text" name="price" id="price" class="form-control">
+      <input ng-model="selectedPrice" type="text" name="price" id="price" class="form-control">
       <label for="bedrooms">Bedrooms</label>
-      <input type="text" name="bedrooms" id="bedrooms" class="form-control" ng-model="bedrooms">
+      <input ng-model="selectedBedrooms" type="text" name="bedrooms" id="bedrooms" class="form-control">
       <label for="bathrooms">Bathrooms</label>
-      <input type="text" name="bathrooms" id="bathrooms" class="form-control" ng-model="bathrooms">
+      <input ng-model="selectedBathrooms" type="text" name="bathrooms" id="bathrooms" class="form-control">
       <label for="sqft">Sq Ft</label>
-      <input type="text" name="sqft" id="sqft" class="form-control" ng-model="sqft">
+      <input ng-model="selectedSqft" type="text" name="sqft" id="sqft" class="form-control">
     </div>
   </div>
   <div class = "well">
     <div>
       <label for="hoa_assessment">Monthly HOA Assessment</label>
-      <input type="text" name="hoa_assessment" id="hoa_assessment" class="form-control" ng-model="hoa_assessment">
-      <label for="tax_assessment">Annual Tax Assessment</label>
-      <input type="text" name="tax_assessment" id="tax_assessment" class="form-control" ng-model="tax_assessment">
+      <input ng-model="selectedHoa" type="text" name="hoa_assessment" id="hoa_assessment" class="form-control" >
+      <label for="tax_assessment">Annual Property Tax</label>
+      <input ng-model="selectedTax" type="text" name="tax_assessment" id="tax_assessment" class="form-control">
     </div>
   </div>
 
-  <%= hidden_field_tag(:input_listing_id, @listing.id) %> 
-  <%= button_tag 'Create', class: "btn btn-default" %> 
-
-  <% end %>
+  <input type="hidden" ng-model="selectedLatitude" name="latitude" id="latitude">
+  <input type="hidden" ng-model="selectedLongitude" name="longitude" id="longitude">
+  <input type="hidden" ng-model="selectedZpid" name="zpid" id="zpid">
+  <input ng-init="setUser(<%= current_user.id %>)" type="hidden" ng-model="selectedUser" name="user" id="user">
+  <button ng-click="createListing()">Create</button>
 
 </div>

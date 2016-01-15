@@ -35,32 +35,30 @@ class ListingsController < ApplicationController
 
   def create
 
-    inputs = calulate_default_values(params)
+    input_walk_score = walk_score_api(params[:latitude], params[:longitude])
 
     @listing = Listing.new(
-      user_id: current_user.id,
-      address: inputs[:address],
-      city: inputs[:city],
-      state: inputs[:state],
-      latitude: inputs[:latitude],
-      longitude: inputs[:longitude],
-      price: inputs[:price],
-      zpid: inputs[:zpid],
-      zip_code: inputs[:zipcode],
-      bathrooms: inputs[:bathrooms],
-      bedrooms: inputs[:bedrooms],
-      sqft: inputs[:sqft],
-      hoa_assessment: inputs[:hoa_assessment],
-      tax_assessment: inputs[:tax_assessment],
-      walk_score: inputs[:walk_score]
+      user_id: params["user_id"],
+      address: params["address"],
+      city: params["city"],
+      state: params["state"],
+      latitude: params["latitude"],
+      longitude: params["longitude"],
+      price: params["price"],
+      zpid: params["zpid"],
+      zip_code: params["zipcode"],
+      bathrooms: params["bathrooms"],
+      bedrooms: params["bedrooms"],
+      sqft: params["sqft"],
+      hoa_assessment: params["hoa_assessment"],
+      tax_assessment: params["tax_assessment"],
+      walk_score: input_walk_score[:walk_score]
       )
 
-    p inputs[:tax_assessment]
-    p inputs[:hoa_assessment]
 
     if @listing.save 
       flash[:success] = "Listing successfully created!"
-      redirect_to "/listings/#{@listing.id}/edit"
+      render text: "OK", status: 200
     end
 
   end

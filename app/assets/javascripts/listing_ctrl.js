@@ -6,6 +6,11 @@
 
   angular.module("app").controller("listingCtrl", function($scope, $http) {
 
+    
+    $scope.setUser = function(id) {
+      $scope.currentUserId = id;
+    };
+
     $http.get("/api/v1/listings.json").then(function(response) {
       $scope.listings = response.data.listings;
       $scope.headings = response.data.dashboard;
@@ -57,14 +62,35 @@
         "bathrooms": listing.result.bathrooms,
         "sqft": listing.result.finishedSqFt,
         "hoa_assessment": listing.result.bedrooms,
-        "tax_assessment": listing.result.bedrooms
+        "tax_assessment": (listing.result.taxAssessment * 0.18).toFixed(2),
+        "longitude": listing.result.address.longitude,
+        "latitude": listing.result.address.latitude,
+        "zip_code": listing.result.address.zipcode,
+        "zpid": listing.result.zpid,
+        "user_id": $scope.currentUserId,
+        "address": listing.result.address.street,
+        "city": listing.result.address.city,
+        "state": listing.result.address.state
       };
-      console.log($scope.selectedListing);
+      
+      $scope.selectedPrice = $scope.selectedListing.price;
+      $scope.selectedBathrooms = $scope.selectedListing.bathrooms;
+      $scope.selectedBedrooms = $scope.selectedListing.bedrooms;
+      $scope.selectedSqFt = $scope.selectedListing.Sqft;
+      $scope.selectedHoa = $scope.selectedListing.hoa_assessment;
+      $scope.selectedTax = $scope.selectedListing.tax_assessment;
+      $scope.selectedLongitude = $scope.selectedListing.longitude;
+      $scope.selectedLatitude = $scope.selectedListing.latitude;
+      $scope.selectedZpid = $scope.selectedListing.zpid;
+
     };
 
 
-
-
+    $scope.createListing = function() {
+      $http.post('/listings', $scope.selectedListing).then(function() {
+        window.location.href = '/listings';
+      });
+    };
 
      // Model to JSON for demo purpose
     $scope.$watch('models', function(model) {
