@@ -52,6 +52,6 @@
   <input type="hidden" ng-model="selectedLongitude" name="longitude" id="longitude">
   <input type="hidden" ng-model="selectedZpid" name="zpid" id="zpid">
   <input ng-init="setUser(<%= current_user.id %>)" type="hidden" ng-model="selectedUser" name="user" id="user">
-  <button ng-show="createListingButton" ng-click="createListing()">Create</button>
+  <button class= "btn btn-default" ng-show="createListingButton" ng-click="createListing()">Create</button>
 
 </div>

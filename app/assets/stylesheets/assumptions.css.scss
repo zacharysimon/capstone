@@ -5,3 +5,19 @@
 .assumptions-wells {
   margin-top: 30px;
 }
+
+.show-listing-edit a {
+  color: #727271;
+}
+
+.show-listing-edit p {
+  display: none;
+  margin-right: 5px;
+  margin-bottom: 10px;
+}
+
+.show-listing-edit:hover {
+  p {
+    display: inline;
+  }
+}

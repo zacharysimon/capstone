@@ -1,25 +1,42 @@
 <div class = "container">
-  <h1><%= @listing.address %></h1>
-  <h2><%= @listing.city %>, <%= @listing.state %>
-
-  <div class = "container">
-    <div class = "well">
-      <p>Price: <%= @listing.price %></p>
-      <p>Bedrooms: <%= @listing.bedrooms %></p>
-      <p>Bathrooms: <%= @listing.bathrooms %></p>
-      <p>Square Feet: <%= @listing.sqft %></p>
+  <div class= "listing-container">
+    <h1 class= "listing-heading"><%= @listing.address %></h1>
+    <div class="row show-listing-edit">
+      <div class="ibox-title col-lg-10">
+        <a href="/listings/<%= @listing.id %>" data-method="delete" rel="nofollow">
+          <i class="fa fa-trash fa-2x"></i>
+        </a>
+        <a href='/listings/<%= @listing.id %>' data-method="delete" rel="nofollow"><p>Delete Listing</p></a>
+      </div>
+      <div class="ibox-title pull-right edit-listing-icon">
+        <a href='/listings/<%= @listing.id %>/edit'><p>Edit Listing</p></a>
+        <a href="/listings/<%= @listing.id %>/edit">
+          <i class="fa fa-cogs fa-2x"></i>
+        </a>
+      </div>
     </div>
-    <div class = "well">
-      <p>Walk Score: <%= @listing.walk_score %></p>
-      <p>Transit Score: <%= @listing.transit_score %></p>
-    </div>
-    <div class = "well">
-      <p>Monthly HOA Fees: <%= @listing.hoa_assessment %></p>
-      <p>Annual Property Tax: <%= @listing.tax_assessment %></p>
+    <div class= "row">
+      <div class = "well col-lg-3">
+        <p><%= @listing.address%></p>
+        <p><%= @listing.city %>, <%= @listing.state %>, <%= @listing.zip_code%></p>
+        <p></p>
+        <p>Walk Score: <%= @listing.walk_score %></p>
+      </div>
+      <div class = "well col-lg-3">
+        <p>Square Feet: <%= @listing.sqft %></p>
+        <p>Cost / Sq Ft: <%= @listing.cost_per_sqft %></p>
+        <p>Bedrooms: <%= @listing.bedrooms %></p>
+        <p>Bathrooms: <%= @listing.bathrooms %></p>
+      </div>
+      <div class = "well col-lg-3">
+        <p>Price: $<%= @listing.price %></p>
+        <p>Monthly Debt Service: $ <%= @listing.monthly_debt_service %></p>
+        <p>Annual Property Tax: $<%= @listing.tax_assessment %></p>
+        <p>Monthly HOA Fees: $<%= @listing.hoa_assessment %></p>
+        <p>Monthly Rental Value: $<%= @listing.rent_estimate %></p>
+      </div>
     </div>
   </div>
-<%= link_to "Edit listing", "/listings/#{@listing.id}/edit" %>
-<a href= "/listings/<%= @listing.id %>" data-method="delete" rel="nofollow">Delete</a>
 
   <div class = "well comments container">
     <div class = "container">
