@@ -5,6 +5,9 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.4'
 # Use mysql as the database for Active Record
 gem 'mysql2' ,  '~> 0.3.20'
+
+gem 'pg', group: :production
+gem 'rails_12factor', group: :production
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 

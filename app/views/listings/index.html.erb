@@ -1,20 +1,23 @@
 <div class="dashboard container">
+    
 
-    <div class="input-group listings-search">
+<div class="row search-row">
+    <div class="col-lg-2"></div>
+    <div class="input-group listings-search col-lg-8">
         <span class="input-group-btn">
             <input type="text" placeholder="Search Listings" class="input-sm form-control" ng-model="listingFilter">
         </span>
     </div>
-    
+</div>
     <div class="ibox-content ibox">
          <div class="row">
-            <div class="create-listing col-lg-9">
+            <div class="create-listing col-lg-3">
                 <div class="input-group">
                     <a href='/listings/new'><i class="fa fa-2x fa-plus"></i></a>
                     <a href='/listings/new'><p>Create new listing</p></a>
                 </div>
             </div>
-            <div class="create-listing col-sm-3 settings">
+            <div class="create-listing pull-right col-lg-3 settings">
                 <a href='/dashboards/edit'><p>Edit Dashboard</p></a>
                 <a href="/dashboards/edit"><i class="fa fa-2x fa-cogs"></i></a>
             </div>

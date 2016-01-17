@@ -9,8 +9,8 @@
     </div>
     
   <div class = "row assumptions-wells">
-  
-      <div class = "well col-md-6 assumptions-info">
+      <div class="col-md-1"></div>
+      <div class = "well col-md-4 assumptions-info">
         <h4>User info</h4>
         <p>First Name:
         <input type="text" value="<%= current_user.first_name %>" name="input_first_name" id="input_first_name"></p>
@@ -18,7 +18,8 @@
         <input type="text" value="<%= current_user.last_name %>" name="input_last_name" id="input_last_name"></p>
         <p>Email: <%= current_user.email %> </p>
       </div>  
-      <div class = "well col-md-6 assumptions-info">
+      <div class="col-md-2"></div>
+      <div class = "well col-md-4 assumptions-info">
         <h4>Mortgage Assumptions</h4>
         <p>Percent Down Payment: 
         <input type="text" value="<%= current_user.percent_down_pmt %>" name="input_percent_down_pmt" id="input_percent_down_pmt">

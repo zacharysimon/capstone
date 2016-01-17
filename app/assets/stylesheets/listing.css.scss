@@ -55,7 +55,7 @@
 }
 
 .listings-search {
-  padding-bottom: 20px;
+  // padding-bottom: 20px;
 
   input {
     background-color: transparent;
@@ -65,3 +65,9 @@
 tr:hover {
   background-color: transparent;
 }
+
+.search-row {
+  margin-bottom: -28px;
+}
+
+
