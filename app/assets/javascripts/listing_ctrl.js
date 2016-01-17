@@ -75,7 +75,8 @@
         "user_id": $scope.currentUserId,
         "address": listing.result.address.street,
         "city": listing.result.address.city,
-        "state": listing.result.address.state
+        "state": listing.result.address.state,
+        "url": listing.result.links.homedetails
       };
     
       $scope.selectedPrice = $scope.selectedListing.price;
@@ -88,6 +89,7 @@
       $scope.selectedLatitude = $scope.selectedListing.latitude;
       $scope.selectedZpid = $scope.selectedListing.zpid;
       $scope.selectedZipCode = $scope.selectedListing.zip_code;
+      $scope.selectedUrl = $scope.selectedListing.url;
 
       if (listing.result.address.street !== "No Zillow listings found. Click here to manually enter data.") {
         $scope.address = listing.result.address.street;
@@ -112,13 +114,20 @@
         "user_id": $scope.currentUserId,
         "address": $scope.address,
         "city": $scope.city,
-        "state": $scope.state
+        "state": $scope.state,
+        "url": $scope.selectedUrl
       }).then(function() {
         window.location.href = '/listings';
       });
     };
 
 
+
+
+
+    $scope.goToShow = function(inputs) {
+      window.location.href = '/listings/' + inputs;
+    };
 
      // Model to JSON for demo purpose
     $scope.$watch('models', function(model) {

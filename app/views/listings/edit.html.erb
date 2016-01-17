@@ -2,7 +2,6 @@
   <%= form_tag "/listings/#{@listing.id}", method: :patch do %>
 
   <h1><%= @listing.address %></h1>
-  <h2><%= @listing.city %>, <%= @listing.state %>
 
   <div class = "container">
     <div class = "form-group">
@@ -20,6 +19,10 @@
     <div class = "form-group">
       <%= label_tag :zip_code %>
       <%= text_field_tag(:input_zip_code, @listing.zip_code, {class: "form-control", placeholder: "Zip Code"})%>
+    </div>
+    <div class = "form-group">
+      <%= label_tag :URL %>
+      <%= text_field_tag(:input_url, @listing.url, {class: "form-control", placeholder: "URL"})%>
     </div>
     <div class = "form-group">
       <%= label_tag :price %>

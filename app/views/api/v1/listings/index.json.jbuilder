@@ -1,5 +1,6 @@
 json.listings do
   json.array! @listings do |listing|
+    json.url listing.url
     json.id listing.id
     json.address listing.address
     json.zip_code listing.zip_code

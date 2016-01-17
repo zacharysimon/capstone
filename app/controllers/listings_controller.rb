@@ -54,7 +54,8 @@ class ListingsController < ApplicationController
       hoa_assessment: params["hoa_assessment"],
       tax_assessment: params["tax_assessment"],
       walk_score: input_walk_score[:walk_score],
-      monthly_debt_service: monthly_pmt[:monthly_pmt]
+      monthly_debt_service: monthly_pmt[:monthly_pmt],
+      url: params["url"]
       )
 
 
@@ -90,6 +91,7 @@ class ListingsController < ApplicationController
         hoa_assessment: params[:input_hoa_assessment],
         tax_assessment: params[:input_tax_assessment],
         walk_score: params[:input_walk_score],
+        url: params[:input_url]
         )
        flash[:success] = "Listing was successfully updated!"
        redirect_to "/listings/#{@listing.id}"
