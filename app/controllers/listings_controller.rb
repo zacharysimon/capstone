@@ -25,8 +25,7 @@ class ListingsController < ApplicationController
   end 
 
   def index
-    search = params[:search]
-    @listings = current_user.listings.all
+    #all index data comes from api/v1/listings_controller
   end
 
   def new

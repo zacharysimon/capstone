@@ -22,7 +22,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="listing in listings" ng-click="goToShow(listing.id)">
+                    <tr ng-repeat="listing in listings" ng-click="goToShow(listing.id)" style="cursor:pointer">
                         <td ng-repeat="dashboard in listing.dashboard">
                             <p>{{dashboard.attribute_value}}</p>
                         </td>
