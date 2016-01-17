@@ -47,7 +47,7 @@ class Listing < ActiveRecord::Base
 
   def rent_estimate
     if read_attribute(:rent_estimate) == nil
-      return 0.008 * price 
+      return (0.008 * price).round(2)
     else
       return read_attribute(:rent_estimate)
     end

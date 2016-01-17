@@ -25,7 +25,7 @@ module ListingsHelper
 
     if check_for_error != "508" && check_for_error != "501" && check_for_error != "500"
         zillow_response = response.parsed_response["searchresults"]["response"]["results"]["result"]
-    else zillow_response = [{"address": {"street": "No existing listings found. Click here to manually enter data."}}]
+    else zillow_response = [{"address": {"street": "No Zillow listings found. Click here to manually enter data."}}]
     end
 
     [zillow_response]      

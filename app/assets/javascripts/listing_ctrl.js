@@ -66,7 +66,7 @@
         "bedrooms": listing.result.bedrooms,
         "bathrooms": listing.result.bathrooms,
         "sqft": listing.result.finishedSqFt,
-        "hoa_assessment": listing.result.bedrooms,
+        "hoa_assessment": (listing.result.taxAssessment * 0.02).toFixed(2),
         "tax_assessment": (listing.result.taxAssessment * 0.18).toFixed(2),
         "longitude": listing.result.address.longitude,
         "latitude": listing.result.address.latitude,
@@ -89,7 +89,7 @@
       $scope.selectedZpid = $scope.selectedListing.zpid;
       $scope.selectedZipCode = $scope.selectedListing.zip_code;
 
-      if (listing.result.address.street !== "No existing listings found. Click here to manually enter data.") {
+      if (listing.result.address.street !== "No Zillow listings found. Click here to manually enter data.") {
         $scope.address = listing.result.address.street;
         $scope.city = listing.result.address.city;
         $scope.state = listing.result.address.state;
