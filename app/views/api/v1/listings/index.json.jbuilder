@@ -1,5 +1,6 @@
 json.listings do
   json.array! @listings do |listing|
+    json.url listing.url
     json.id listing.id
     json.address listing.address
     json.zip_code listing.zip_code
@@ -13,7 +14,7 @@ json.listings do
     json.bathrooms listing.bathrooms
     json.price listing.price
     json.hoa_assessment listing.hoa_assessment
-    # json.debt_service listing.monthly_pmt(current_user)
+    json.debt_service listing.monthly_debt_service
     json.cost_per_sqft listing.cost_per_sqft
     json.rent_estimate listing.rent_estimate
 

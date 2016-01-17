@@ -5,35 +5,6 @@ class Listing < ActiveRecord::Base
   has_many :comments 
 
    
-
-  def zillow_mortgage_api(user)
-    if price != nil
-      if user
-        url = "http://www.zillow.com/webservice/GetMonthlyPayments.htm?zws-id=X1-ZWz19ytk7im2ob_728x4&price=#{price}&down=#{user.percent_down_pmt.to_i}"
-      else
-        # defaults to 20% downpayment
-        url = "http://www.zillow.com/webservice/GetMonthlyPayments.htm?zws-id=X1-ZWz19ytk7im2ob_728x4&price=#{price}&down=20"
-      end
-    # if there is no price, defaults to $100,000
-    else
-      url = "http://www.zillow.com/webservice/GetMonthlyPayments.htm?zws-id=X1-ZWz19ytk7im2ob_728x4&price=100000&down=20"
-    end
-
-    response = HTTParty.get(url)
-
-    if user.loan_type == 30
-      return response.parsed_response["paymentsSummary"]["response"]["payment"][0]
-    else 
-      #sets default loan type to 15 yr fixed if a user isn't logged in
-      return response.parsed_response["paymentsSummary"]["response"]["payment"][1]
-    end
-  end
-
-  def monthly_pmt(user)
-    monthly_pmt = zillow_mortgage_api(user)["monthlyPrincipalAndInterest"]
-  end
-
-   
   def cost_per_sqft
     if price && sqft 
       return price / sqft 
@@ -46,7 +17,7 @@ class Listing < ActiveRecord::Base
     check = Comment.find_by(listing_id: id, comment_type: "neighborhood")
     if check
       return check.score
-    else return 5
+    else return ""
     end
   end
 
@@ -54,7 +25,7 @@ class Listing < ActiveRecord::Base
     check = Comment.find_by(listing_id: id, comment_type: "building")
     if check
       return check.score
-    else return 5
+    else return ""
     end
   end
 
@@ -62,7 +33,7 @@ class Listing < ActiveRecord::Base
     check = Comment.find_by(listing_id: id, comment_type: "layout")
     if check
       return check.score
-    else return 5
+    else return ""
     end
   end
 
@@ -70,13 +41,13 @@ class Listing < ActiveRecord::Base
     check = Comment.find_by(listing_id: id, comment_type: "amenities")
     if check
       return check.score
-    else return 5
+    else return ""
     end
   end
 
   def rent_estimate
     if read_attribute(:rent_estimate) == nil
-      return 0.008 * price 
+      return (0.008 * price).round(2)
     else
       return read_attribute(:rent_estimate)
     end

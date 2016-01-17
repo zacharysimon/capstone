@@ -1,0 +1,33 @@
+.listing-container {
+  border: 2px solid white;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+
+.listing-container h1 {
+  padding-bottom: 10px;
+}
+
+.edit-listing-icon {
+  margin-right: 15px;
+}
+
+.edit-comments:hover {
+  p {
+    display: inline;
+  }
+}
+.edit-comments p {
+  display: none;
+  padding-bottom: 5px;
+  padding-right: 5px;
+}
+
+.edit-comments a {
+  color: #727271;
+}
+
+.create-comment-container {
+  padding-bottom: 20px;
+}

@@ -3,26 +3,29 @@ class ListingsController < ApplicationController
   include HTTParty 
   
   def home 
+
     if current_user
+      default_loan_type = 15
+      default_percent_down = 20.00
+
       unless CharacteristicsUser.where(user_id: current_user.id).exists? 
-        i = 1
-        vis = true
         Characteristic.all.each do |char|
           CharacteristicsUser.create(
             user_id: current_user.id,
             characteristic_id: char.id,
-            order: i,
-            visible: vis,
+            order: char.default_order,
+            visible: char.default_visible
             )
-          i += 1
-          vis = !vis
         end
+        current_user.update(
+          loan_type: default_loan_type,
+          percent_down_pmt: default_percent_down)
       end
     end
   end 
 
   def index
-    @listings = current_user.listings.all
+    #all this is in api/v1/listings
   end
 
   def new
@@ -31,32 +34,33 @@ class ListingsController < ApplicationController
 
   def create
 
-    inputs = calulate_default_values(params)
+    input_walk_score = walk_score_api(params[:latitude], params[:longitude])
+    monthly_pmt = zillow_mortgage_helper(params["price"], params["user_id"])
 
     @listing = Listing.new(
-      user_id: current_user.id,
-      address: inputs[:address],
-      city: inputs[:city],
-      state: inputs[:state],
-      latitude: inputs[:latitude],
-      longitude: inputs[:longitude],
-      price: inputs[:price],
-      zpid: inputs[:zpid],
-      zip_code: inputs[:zipcode],
-      bathrooms: inputs[:bathrooms],
-      bedrooms: inputs[:bedrooms],
-      sqft: inputs[:sqft],
-      hoa_assessment: inputs[:hoa_assessment],
-      tax_assessment: inputs[:tax_assessment],
-      walk_score: inputs[:walk_score]
+      user_id: params["user_id"],
+      address: params["address"],
+      city: params["city"],
+      state: params["state"],
+      latitude: params["latitude"],
+      longitude: params["longitude"],
+      price: params["price"],
+      zpid: params["zpid"],
+      zip_code: params["zip_code"],
+      bathrooms: params["bathrooms"],
+      bedrooms: params["bedrooms"],
+      sqft: params["sqft"],
+      hoa_assessment: params["hoa_assessment"],
+      tax_assessment: params["tax_assessment"],
+      walk_score: input_walk_score[:walk_score],
+      monthly_debt_service: monthly_pmt[:monthly_pmt],
+      url: params["url"]
       )
 
-    p inputs[:tax_assessment]
-    p inputs[:hoa_assessment]
 
     if @listing.save 
       flash[:success] = "Listing successfully created!"
-      redirect_to "/listings"
+      render text: "OK", status: 200
     end
 
   end
@@ -86,6 +90,7 @@ class ListingsController < ApplicationController
         hoa_assessment: params[:input_hoa_assessment],
         tax_assessment: params[:input_tax_assessment],
         walk_score: params[:input_walk_score],
+        url: params[:input_url]
         )
        flash[:success] = "Listing was successfully updated!"
        redirect_to "/listings/#{@listing.id}"

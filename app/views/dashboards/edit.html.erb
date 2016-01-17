@@ -1,17 +1,23 @@
-<div ng-app="app">
-  <div ng-controller="listingCtrl">
 
-    <a href='/listings'><button ng-click="updateDashboard(this, <%= current_user.id %>)">Update</button></a>
+<div class="dashboard-container container">
+  
+        <div class="col-lg-7"></div>
+        <div class="dashboard-text col-lg-3 settings">
+          <a href='/listings' ng-click="updateDashboard(this, <%= current_user.id %>)"><p>Save Dashboard</p></a>
+          <a class="dashboard-save pull-right" href='/listings' ng-click="updateDashboard(this, <%= current_user.id %>)"><i class="fa fa-floppy-o fa-2x"></i></a>
+        </div>
 
-    <div class="container simpleDemo">
-      <div class="col-md-12">
-        <div class="row">
-          <div ng-repeat="(listName, list) in models.lists" class="col-md-4">
-            <div class="panel panel-info">
+
+
+  <div class="container simpleDemo">
+      <div class="row">
+        <div class="col-md-12 dashboard-boxes">
+          <div ng-repeat="(listName, list) in models.lists" class="col-md-5">
+            <div class="panel panel-info well">
               <div class="panel-heading">
                 <h2 class="panel-title"> {{listName}}</h2>
-                <ol dnd-list="list">
-                <!-- The dnd-draggable directive makes an element draggable and will
+                  <ol dnd-list="list">
+                    <!-- The dnd-draggable directive makes an element draggable and will
                      transfer the object that was assigned to it. If an element was
                      dragged away, you have to remove it from the original list
                      yourself using the dnd-moved attribute -->
@@ -22,16 +28,16 @@
                      dnd-selected="models.selected = item"
                      ng-class="{'selected': models.selected === item}">
                      {{item.label}}
-                   </li>
-                 </ol>
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
-   </div>
- </div>
+                    </li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+</div>
 
 
 

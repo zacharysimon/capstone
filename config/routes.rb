@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      get '/listings/zillow_search' => 'listings#zillow_search'
       get '/listings' => 'listings#index'
       get '/dashboard' => 'listings#dashboard'
       patch '/dashboard' => 'listings#update'
@@ -28,8 +29,8 @@ Rails.application.routes.draw do
   get '/assumptions/edit' => 'assumptions#edit'
   patch '/assumptions' => 'assumptions#update'
 
-  patch ':id/comments' => 'comments#update'
+  patch '/comments/:id' => 'comments#update'
   get '/comments/new' => 'comments#new'
-  get '/comments/edit' => 'comments#edit'
+  get '/comments/:id/edit' => 'comments#edit'
   post '/comments' => 'comments#create'
 end

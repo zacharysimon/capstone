@@ -13,11 +13,55 @@
 .ibox a {
   color: #727271;
 }
+.ibox-content p {
+  display: none;
+  padding-left: 12px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}
+.create-listing:hover {
+  p {
+    display: inline;
+  }
+}
 
 .ibox-content {
   padding-bottom: 15px;
 }
 
-.wrench {
+.settings {
   text-align: right;
+}
+
+.create_address:hover {
+  background-color: #727271;
+  color: white;
+  border-radius: 6px;
+}
+
+.listing-property {
+  height: 200px;
+}
+
+
+.listing-details {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.comment-well {
+  margin-left: 18px;
+  height: 150px;
+}
+
+.listings-search {
+  padding-bottom: 20px;
+
+  input {
+    background-color: transparent;
+  }
+}
+
+tr:hover {
+  background-color: transparent;
 }
