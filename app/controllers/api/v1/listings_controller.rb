@@ -2,22 +2,9 @@ class Api::V1::ListingsController < ApplicationController
   include ListingsHelper
 
   def index
-    search = params["search"]
-    puts "=======================asdfasdf==========="
-    p 
-
     if current_user
-
       @dashboard = current_user.get_dashboard
-
-      if search 
-        user_listings = current_user.listings.all
-
-        @listings = user_listings.where("address LIKE ? OR zip_code LIKE ? OR city LIKE ? OR state LIKE ? AND user_id LIKE ?", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "#{current_user.id}")
-      else
-        @listings = current_user.listings.all
-      end
-
+      @listings = current_user.listings.all
     end
   end
 

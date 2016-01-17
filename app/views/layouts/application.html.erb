@@ -25,17 +25,9 @@
             <li role="presentation"><a href="/assumptions">Profile</a></li>
           <% end %>
 
-          <form class="col-sm-3 navbar-form navbar-right" role="search" action="/listings">
-            <div class="input-group">
-              <input id="search" name="search" type="text" placeholder="Search Listings" class="input-sm form-control">
-              <span class="input-group-btn">
-                <button type="submit" class="btn btn-sm btn-primary"> Go!</button>
-              </span>
-            </div>
-          </form>
 
           <% if current_user %>
-            <li role="presentation"><%= link_to "Sign Out", "/users/sign_out", method: :delete %></li>
+            <li class="pull-right" role="presentation"><%= link_to "Sign Out", "/users/sign_out", method: :delete %></li>
           <% end %>
 
         </ul>

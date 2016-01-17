@@ -122,6 +122,41 @@
     };
 
 
+    $scope.sortListings = function(input) {
+      var column_name = input.column_name;
+
+
+      function compare(a,b) {
+        if (a[column_name] < b[column_name]) {
+          return -1;
+        } else if (a[column_name] > b[column_name]) {
+          return 1;
+        } else {
+          return 0;
+        }
+      }
+
+      if (input.isSorted) {
+        input.isSorted = false;
+        $scope.listings.reverse();
+      }else {
+        input.isSorted = true;
+        $scope.listings.sort(compare);
+      }
+    };
+
+
+    $scope.search = function(listing) {
+      if (!$scope.listingFilter) {
+        return true;
+      }
+      if (listing.address.toLowerCase().indexOf($scope.listingFilter) != -1) {
+        return true;
+      };
+      return false;
+    };
+
+
 
 
 

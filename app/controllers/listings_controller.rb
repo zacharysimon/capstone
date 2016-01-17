@@ -25,7 +25,7 @@ class ListingsController < ApplicationController
   end 
 
   def index
-    #all index data comes from api/v1/listings_controller
+    #all this is in api/v1/listings
   end
 
   def new
