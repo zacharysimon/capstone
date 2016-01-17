@@ -1,4 +1,3 @@
-
 <div class="dashboard-container container">
   
         <div class="col-lg-7"></div>
@@ -17,10 +16,6 @@
               <div class="panel-heading">
                 <h2 class="panel-title"> {{listName}}</h2>
                   <ol dnd-list="list">
-                    <!-- The dnd-draggable directive makes an element draggable and will
-                     transfer the object that was assigned to it. If an element was
-                     dragged away, you have to remove it from the original list
-                     yourself using the dnd-moved attribute -->
                      <li ng-repeat="item in list"
                      dnd-draggable="item"
                      dnd-moved="list.splice($index, 1)"
