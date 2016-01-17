@@ -4,7 +4,6 @@
       <div class="ibox-title pull-right" ng-click="updateAssumptions()">
         <a href="#">
           <button type="submit">Update</button>
-          <i type="submit" class="fa fa-floppy-o fa-2x"></i>
         </a>
       </div>
     </div>
@@ -21,8 +20,14 @@
       </div>  
       <div class = "well col-md-6 assumptions-info">
         <h4>Mortgage Assumptions</h4>
-        <p>Percent Down Payment: <input type="text" value="<%= current_user.percent_down_pmt %>" name="input_percent_down_pmt" id="input_percent_down_pmt">% </p>
-        <p>Loan Type: <input type="text" value="<%= current_user.loan_type %>" name="input_loan_type" id="input_loan_type"> year fixed rate</p>
+        <p>Percent Down Payment: 
+        <input type="text" value="<%= current_user.percent_down_pmt %>" name="input_percent_down_pmt" id="input_percent_down_pmt">
+        % </p>
+        <p>Loan Type: <select type="text" name="input_loan_type" id="input_loan_type">
+          <option value="15">15 Year Fixed Rate</option>
+          <option value="30">30 Year Fixed Rate</option>
+          <option value="5ARM">5 Year ARM</option>
+        </select>
       </div> 
      
   </div>
