@@ -3,7 +3,39 @@
     <h1 class= "listing-heading"><%= @listing.address %></h1>
     <div class= "row listing-details">
       <!-- <div class="col-lg-1"></div> -->
-      <div class = "well col-lg-4 listing-property">
+      <div class= "col-lg-3 well" id="googleMap" style="height:200px;">
+        <script src="http://maps.googleapis.com/maps/api/js"></script>
+        <script>
+          var myCenter=new google.maps.LatLng(<%= @listing.latitude %>, <%= @listing.longitude%>);
+
+          function initialize()
+          {
+          var mapProp = {
+            center: myCenter,
+            zoom:14,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+          var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+          var image = "fa-house-marker.png";
+          var marker = new google.maps.Marker({
+            position: myCenter,
+            icon: image,
+            });
+
+          marker.setMap(map);
+
+          // Zoom to 15 when clicking on marker
+          google.maps.event.addListener(marker,'click',function() {
+            map.setZoom(15);
+            map.setCenter(marker.getPosition());
+            });
+          }
+          google.maps.event.addDomListener(window, 'load', initialize);
+        </script>
+      </div>
+      <div class = "well col-lg-3 listing-property">
         <p><%= @listing.address%></p>
         <p><%= @listing.city %>, <%= @listing.state %>, <%= @listing.zip_code%></p>
         <p></p>
@@ -13,13 +45,13 @@
         <a href="<%= @listing.url %>" target="_blank">Link</a>
         <% end %>
       </div>
-      <div class = "well col-lg-4 listing-property">
+      <div class = "well col-lg-3 listing-property">
         <p>Square Feet: <%= @listing.sqft %></p>
         <p>Cost / Sq Ft: <%= @listing.cost_per_sqft %></p>
         <p>Bedrooms: <%= @listing.bedrooms %></p>
         <p>Bathrooms: <%= @listing.bathrooms %></p>
       </div>
-      <div class = "well col-lg-4 listing-property">
+      <div class = "well col-lg-3 listing-property">
         <p>Price: $<%= @listing.price %></p>
         <p>Monthly Debt Service: $ <%= @listing.monthly_debt_service %></p>
         <p>Annual Property Tax: $<%= @listing.tax_assessment %></p>

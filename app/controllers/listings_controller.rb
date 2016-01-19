@@ -21,6 +21,7 @@ class ListingsController < ApplicationController
           loan_type: default_loan_type,
           percent_down_pmt: default_percent_down)
       end
+      redirect_to "/listings"
     end
   end 
 
