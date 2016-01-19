@@ -75,12 +75,14 @@
             <option value="10">10</option>
           </select>
         </div>
-        <div class="form-group col-lg-7">
+        <div class="form-group col-lg-6">
           <label for="comment">Comment</label>
           <input type="text" name="input_comment" id="input_comment" style="width: 85%;">
         </div>
         <%= hidden_field_tag(:input_listing_id, @listing.id) %> 
-        <%= button_tag 'Create', class: "btn btn-default" %> 
+        <div class="col-lg-1">
+          <%= button_tag 'Create', class: "btn btn-default" %> 
+        </div>
      <% end %>
     </div>  
     
