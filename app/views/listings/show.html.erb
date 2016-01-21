@@ -18,10 +18,11 @@
 
           var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
 
-          var image = "fa-house-marker.png";
+          <% image = 'house34.png' %>
           var marker = new google.maps.Marker({
+            map: map,
+            icon: '<%= image_url(image)%>', 
             position: myCenter,
-            icon: image,
             });
 
           marker.setMap(map);
