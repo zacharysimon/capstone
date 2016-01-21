@@ -1,3 +1,10 @@
+.show-profile {
+  background-image: image-url("house-door.jpeg");
+  background-size: 1200px;
+  background-position: center;
+  height: 700px;
+}
+
 .assumptions-info {
   height: 150px;
 }
@@ -7,7 +14,7 @@
 }
 
 .show-listing-edit a {
-  color: #727271;
+  color: white;
 }
 
 .show-listing-edit p {

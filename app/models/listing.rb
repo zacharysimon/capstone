@@ -53,6 +53,11 @@ class Listing < ActiveRecord::Base
     end
   end
 
+  # def get_images
+  #   response = HTTParty.get("http://www.zillow.com/webservice/GetUpdatedPropertyDetails.htm?zws-id=X1-ZWz19ytk7im2ob_728x4&zpid=#{zpid}")
+  #   response.parsed_response["updatedPropertyDetails"]["response"]["images"]["image"]["url"]
+  # end
+
 
 
 

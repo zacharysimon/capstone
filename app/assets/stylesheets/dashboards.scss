@@ -2,8 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+
 .dashboard-container {
   padding-top: 30px;
+  background-image: image-url("houseshill.jpeg");
+  background-position: center;
+  height: 700px;
 }
 .panel-title {
   text-align: center;
@@ -33,7 +38,7 @@
     display: inline;
   }
   a {
-    color: #727271;
+    color: white;
   }
 }
 
@@ -44,5 +49,5 @@
 }
 
 .dashboard-save {
-  color: #727271
+  color: white
 }
