@@ -1,5 +1,13 @@
 == README
 
+Holmes is an application that lets users keep track of listings and measure them across various metrics. 
+
+Application dependencies include
+* bootstrap-sass (~> 3.3.5)
+* font-awesome-rails (= 4.3.0.0)
+* finance (2.0.0)
+
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
