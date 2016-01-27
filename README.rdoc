@@ -7,6 +7,12 @@ Application dependencies include
 * font-awesome-rails (= 4.3.0.0)
 * finance (2.0.0)
 
+= Proceed with normal bundle install and db creation
+
+Current Todo List
+* migrate database to postgres and deploy to Heroku
+* write tests and debug
+* build out analytics capabilities 
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
