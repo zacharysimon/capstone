@@ -4,6 +4,7 @@ class Listing < ActiveRecord::Base
   validates :address, presence: true
   validates :city, presence: true
   validates :state, presence: true
+  validates :price, presence: true, numericality: true
 
   belongs_to :user
   has_many :comments 
