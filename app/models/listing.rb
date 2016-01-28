@@ -1,6 +1,10 @@
 class Listing < ActiveRecord::Base
   include Finance
 
+  validates :address, presence: true
+  validates :city, presence: true
+  validates :state, presence: true
+
   belongs_to :user
   has_many :comments 
 
