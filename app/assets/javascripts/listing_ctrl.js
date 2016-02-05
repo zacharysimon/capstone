@@ -147,13 +147,11 @@
 
 
     $scope.search = function(listing) {
-      if (!$scope.listingFilter) {
-        return true;
-      } else if (listing.address.toLowerCase().indexOf($scope.listingFilter) !== -1) {
-        return true;
-      } else if (listing.city.toLowerCase().indexOf($scope.listingFilter) !== -1) {
-        return true;
-      } else if (listing.zip_code.toLowerCase().indexOf($scope.listingFilter) !== -1) {
+      if (!$scope.listingFilter ||
+        listing.address.toLowerCase().indexOf($scope.listingFilter) !== -1 ||
+        listing.address.toLowerCase().indexOf($scope.listingFilter) !== -1 ||
+        listing.zip_code.toLowerCase().indexOf($scope.listingFilter) !== -1
+        ) {
         return true;
       }
 
