@@ -63,7 +63,6 @@ class ListingsController < ApplicationController
       url: params["url"]
       )
 
-
     if @listing.save 
       flash[:success] = "Listing successfully created!"
       render text: "OK", status: 200
