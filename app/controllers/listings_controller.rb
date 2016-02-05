@@ -1,6 +1,8 @@
 class ListingsController < ApplicationController
-  include ListingsHelper
+  # include ZillowApi
   include HTTParty 
+  # include ListingsHelper
+
   
   def home 
 
@@ -69,6 +71,7 @@ class ListingsController < ApplicationController
 
   def show
     @listing = Listing.find_by(id: params[:id])
+    testing_module
   end
 
   def edit

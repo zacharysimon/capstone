@@ -47,8 +47,6 @@ class Api::V1::ListingsController < ApplicationController
  
       i += 1
     end
-
-    # redirect_to "../listings"
   end
 
 end
