@@ -13,10 +13,6 @@ class Api::V1::ListingsController < ApplicationController
       @dashboard = current_user.get_whole_dashboard
     end
   end
-  
-  def create
-
-  end
 
   def zillow_search
     response = zillow_search_helper(params)
@@ -33,19 +29,18 @@ class Api::V1::ListingsController < ApplicationController
     input_attributes = params["data"]["lists"]
     user = params["data"]["user"]
 
-    i = 1
+    counter = 1
     input_attributes.each do |attribute|
         
+      visible = false
       if attribute["visible"] == "true"
-        visible = true
-      else visible = false
+        visible = true 
       end
 
       change_attribute = CharacteristicsUser.find_by(user_id: user, characteristic_id: attribute['id'])
-
-      change_attribute.update(visible: visible, order: i)
+      change_attribute.update(visible: visible, order: counter)
  
-      i += 1
+      counter += 1
     end
   end
 

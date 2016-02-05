@@ -1,14 +1,12 @@
 class ListingsController < ApplicationController
   # include ZillowApi
   include HTTParty 
-  # include ListingsHelper
+  include ListingsHelper
 
   
   def home 
 
-    if current_user
-      default_loan_type = 15
-      default_percent_down = 20.00
+    if current_user #redirects to index if there is a current user, and sets defaults
 
       unless CharacteristicsUser.where(user_id: current_user.id).exists? 
         Characteristic.all.each do |char|
@@ -19,10 +17,15 @@ class ListingsController < ApplicationController
             visible: char.default_visible
             )
         end
+
+        default_loan_type = 15
+        default_percent_down = 20.00
+
         current_user.update(
           loan_type: default_loan_type,
           percent_down_pmt: default_percent_down)
       end
+
       redirect_to "/listings"
     end
   end 
@@ -70,8 +73,9 @@ class ListingsController < ApplicationController
 
 
   def show
-    @listing = Listing.find_by(id: params[:id])
-    testing_module
+    if current_user
+      @listing = Listing.find_by(id: params[:id])
+    end
   end
 
   def edit
