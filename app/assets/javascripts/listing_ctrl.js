@@ -5,7 +5,6 @@
   "use strict";
 
   angular.module("app").controller("listingCtrl", function($scope, $http) {
-
     
     $scope.setUser = function(id) {
       $scope.currentUserId = id;
@@ -32,22 +31,38 @@
         }
       }
     });
+
+    $scope.updateDashboard = function(inputs, user) {
+      var lists = [];
+      var data = {"data": {"lists": lists, "user": user}};
+
+      for (var i = 0; i < inputs.models.lists.Visible.length; i++) {
+        inputs.models.lists.Visible[i]["visible"] = "true";
+        lists.push(inputs.models.lists.Visible[i]);
+      }
+
+      for (var i = 0; i < inputs.models.lists.Hidden.length; i++) {
+        inputs.models.lists.Hidden[i]["visible"] = "false";
+        lists.push(inputs.models.lists.Hidden[i]);
+      }
+
+      $http.patch("/api/v1/dashboard.json", data).then(function(response) {
+        console.log(response);
+      }, function(error) {
+        console.log(error);
+        $scope.errors = error.data.errors;
+      });
+    };
       
     $scope.checkZillow = function(address, city, state) {
       $scope.results = [];
       $scope.showZillow = true;
 
-
-      console.log(address, city, state);
       $http.get('/api/v1/listings/zillow_search?address=' + address + '&city=' + city + '&state=' + state).then(function(response) {
         $scope.initialResults = response.data["results"][0];
-        console.log($scope.initialResults);
-        console.log($scope.initialResults.length);
 
-        // for this first condition figure out how to make it so it doesnt console log an error
-        if ($scope.initialResults === null) {
-          $scope.results = $scope.initialResults;
-        } else if ($scope.initialResults.length === undefined) {
+        
+        if ($scope.initialResults.length === undefined) {
           $scope.results = [$scope.initialResults];
         } else {
           $scope.results = $scope.initialResults;
@@ -57,7 +72,6 @@
 
 
     $scope.selectListing = function(listing) {
-      console.log(listing.result);
       $scope.showProperties = true;
       $scope.createListingButton = true;
 
@@ -96,7 +110,6 @@
         $scope.city = listing.result.address.city;
         $scope.state = listing.result.address.state;
       }
-
     };
 
     $scope.createListing = function() {
@@ -124,7 +137,6 @@
 
     $scope.sortListings = function(input) {
       var column_name = input.column_name;
-
 
       function compare(a,b) {
         if (a[column_name] < b[column_name]) {
@@ -154,50 +166,14 @@
         ) {
         return true;
       }
-
       return false;
     };
-
-
-
 
 
     $scope.goToShow = function(inputs) {
       window.location.href = '/listings/' + inputs;
     };
 
-     // Model to JSON for demo purpose
-    $scope.$watch('models', function(model) {
-      $scope.modelAsJson = angular.toJson(model, true);
-    }, true);
-
-    $scope.updateDashboard = function(inputs, user) {
-      var lists = [];
-      var data = {"data": {"lists": lists, "user": user}};
-
-      for (var i = 0; i < inputs.models.lists.Visible.length; i++) {
-        inputs.models.lists.Visible[i]["visible"] = "true";
-        lists.push(inputs.models.lists.Visible[i]);
-      }
-
-      for (var i = 0; i < inputs.models.lists.Hidden.length; i++) {
-        inputs.models.lists.Hidden[i]["visible"] = "false";
-        lists.push(inputs.models.lists.Hidden[i]);
-      }
-
-      $http.patch("/api/v1/dashboard.json", data).then(function(response) {
-        console.log(response);
-      }, function(error) {
-        console.log(error);
-        $scope.errors = error.data.errors;
-      });
-          
-
-      console.log(lists);
-      console.log(inputs);
-    };
-
     window.$scope = $scope;
-    
   });
 })();
