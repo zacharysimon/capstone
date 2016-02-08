@@ -18,29 +18,30 @@ class Listing < ActiveRecord::Base
   end
 
   def find_comment_score(input)
-    score = Comment.find_by(listing_id: id, comment_type: "#{input}").score
+    comment = Comment.find_by(listing_id: id, comment_type: input)
 
-    if !score
+    if !comment 
       score = ""
+    else score = comment.score 
     end
-
-    score
+    
+    score    
   end
 
   def neighborhood_score
-    find_comment_score(Neighborhood)
+    find_comment_score("Neighborhood")
   end
 
   def building_score
-    find_comment_score(Building)
+    find_comment_score("Building")
   end
 
   def layout_score
-    find_comment_score(Layout)
+    find_comment_score("Layout")
   end
 
   def amenities_score
-    find_comment_score(Amenities)
+    find_comment_score("Amenities")
   end
 
   def rent_estimate
