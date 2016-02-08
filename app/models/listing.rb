@@ -10,11 +10,13 @@ class Listing < ActiveRecord::Base
   has_many :comments 
    
   def cost_per_sqft
+    cost_per_sqft = ""
+
     if price && sqft 
-      return price / sqft 
-    else
-      return "Need more info"
+      cost_per_sqft = price / sqft 
     end
+
+    cost_per_sqft
   end
 
   def find_comment_score(input)
@@ -24,7 +26,7 @@ class Listing < ActiveRecord::Base
       score = ""
     else score = comment.score 
     end
-    
+
     score    
   end
 
@@ -45,11 +47,13 @@ class Listing < ActiveRecord::Base
   end
 
   def rent_estimate
-    if read_attribute(:rent_estimate) == nil
-      return (0.008 * price).round(2)
-    else
-      return read_attribute(:rent_estimate)
+    rent_est = read_attribute(:rent_estimate)
+
+    if rent_est == nil
+      rent_est = (0.008 * price).round(2) 
     end
+
+    rent_est
   end
 
 
