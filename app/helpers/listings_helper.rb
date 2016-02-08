@@ -1,16 +1,19 @@
 module ListingsHelper
 
+  $WS_APIKEY = "a6bc24ea405f37d3b976e634c478d688"
+  $ZWS_ID = "X1-ZWz19ytk7im2ob_728x4"
+
   def walk_score_api(lat, long)
 
     input_lat = lat
     input_lon = long
 
-    response = HTTParty.get("http://api.walkscore.com/score?format=xml&lat=#{input_lat}&lon=#{input_lon}&wsapikey=a6bc24ea405f37d3b976e634c478d688")
+    response = HTTParty.get("http://api.walkscore.com/score?format=xml&lat=#{input_lat}&lon=#{input_lon}&wsapikey=#{$WS_APIKEY}")
 
     walk_score = response.parsed_response["result"]["walkscore"]
 
     {
-        walk_score: walk_score
+      walk_score: walk_score
     }
   end
 
@@ -19,7 +22,10 @@ module ListingsHelper
     input_city = params[:city]
     input_state = params[:state]
 
-    response = HTTParty.get("http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=X1-ZWz19ytk7im2ob_728x4&address=#{input_address}&citystatezip=#{input_city},#{input_state}")
+    p $ZWS_ID
+    puts "===================================="
+
+    response = HTTParty.get("http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=#{$ZWS_ID}&address=#{input_address}&citystatezip=#{input_city},#{input_state}")
 
      check_for_error = response.parsed_response["searchresults"]["message"]["code"]
 
@@ -35,10 +41,6 @@ module ListingsHelper
   def zillow_mortgage_helper(input_price, input_user)
 
     user = User.find_by(id: input_user)
-
-    p user
-    p input_price
-    p user.percent_down_pmt
 
     if input_price != nil
       if user
