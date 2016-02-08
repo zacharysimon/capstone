@@ -8,7 +8,6 @@ class Listing < ActiveRecord::Base
 
   belongs_to :user
   has_many :comments 
-
    
   def cost_per_sqft
     if price && sqft 
@@ -18,36 +17,30 @@ class Listing < ActiveRecord::Base
     end
   end
 
-  def neighborhood_score
-    check = Comment.find_by(listing_id: id, comment_type: "neighborhood")
-    if check
-      return check.score
-    else return ""
+  def find_comment_score(input)
+    score = Comment.find_by(listing_id: id, comment_type: "#{input}").score
+
+    if !score
+      score = ""
     end
+
+    score
+  end
+
+  def neighborhood_score
+    find_comment_score(Neighborhood)
   end
 
   def building_score
-    check = Comment.find_by(listing_id: id, comment_type: "building")
-    if check
-      return check.score
-    else return ""
-    end
+    find_comment_score(Building)
   end
 
   def layout_score
-    check = Comment.find_by(listing_id: id, comment_type: "layout")
-    if check
-      return check.score
-    else return ""
-    end
+    find_comment_score(Layout)
   end
 
   def amenities_score
-    check = Comment.find_by(listing_id: id, comment_type: "amenities")
-    if check
-      return check.score
-    else return ""
-    end
+    find_comment_score(Amenities)
   end
 
   def rent_estimate
@@ -57,14 +50,6 @@ class Listing < ActiveRecord::Base
       return read_attribute(:rent_estimate)
     end
   end
-
-  # def get_images
-  #   response = HTTParty.get("http://www.zillow.com/webservice/GetUpdatedPropertyDetails.htm?zws-id=X1-ZWz19ytk7im2ob_728x4&zpid=#{zpid}")
-  #   response.parsed_response["updatedPropertyDetails"]["response"]["images"]["image"]["url"]
-  # end
-
-
-
 
 
   #below are methods for investing data, which will be secondary features once its all built
