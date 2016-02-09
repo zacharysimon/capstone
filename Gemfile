@@ -13,7 +13,7 @@ gem 'sass-rails', '~> 5.0'
 
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'httparty'
-
+gem 'faker'
 gem 'finance'
 #gems used in the theme I installed
 gem 'font-awesome-rails', '4.3.0.0'
