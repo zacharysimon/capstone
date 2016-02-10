@@ -31,7 +31,7 @@ class ListingsController < ApplicationController
   end 
 
   def index
-    #all this is in api/v1/listings
+    redirect_to '/' unless current_user
   end
 
   def new
@@ -72,15 +72,12 @@ class ListingsController < ApplicationController
 
 
   def show
-    if current_user
-      @listing = Listing.find_by(id: params[:id])
-    end
+    #need to refactor so someone not signed in doesn't get an error heres
+    @listing = Listing.find_by(id: params[:id]) if current_user
   end
 
   def edit
-    if current_user
-      @listing = Listing.find_by(id: params[:id])
-    end
+    @listing = Listing.find_by(id: params[:id]) if current_user
   end
 
   def update
