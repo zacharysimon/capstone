@@ -9,39 +9,25 @@ class Api::V1::ListingsController < ApplicationController
   end
 
   def dashboard
-    if current_user
-      @dashboard = current_user.get_whole_dashboard
-    end
+    @dashboard = current_user.get_whole_dashboard if current_user
   end
 
   def zillow_search
     response = zillow_search_helper(params)
 
-    hash_result = {
-        results: response
-      }
+    hash_result = { results: response }
 
     render json: hash_result
   end
 
   def update
-
-    input_attributes = params["data"]["lists"]
-    user = params["data"]["user"]
-
-    counter = 1
-    input_attributes.each do |attribute|
-        
+    params["data"]["lists"].each_with_index do |attribute, index|
       visible = false
-      if attribute["visible"] == "true"
-        visible = true 
-      end
+      visible = true if attribute["visible"] == "true"
 
-      change_attribute = CharacteristicsUser.find_by(user_id: user, characteristic_id: attribute['id'])
-      change_attribute.update(visible: visible, order: counter)
- 
-      counter += 1
-    end
+      change_attribute = CharacteristicsUser.find_by(user_id: params["data"]["user"], characteristic_id: attribute['id'])
+      change_attribute.update(visible: visible, order: index)
+     end
   end
 
 end
