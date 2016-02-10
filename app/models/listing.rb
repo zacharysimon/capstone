@@ -76,7 +76,6 @@ class Listing < ActiveRecord::Base
             "five_yr_pmt" => five_yr_pmt,
             "five_yr_equity" => five_yr_equity,
             }
-
   end
 
 end
