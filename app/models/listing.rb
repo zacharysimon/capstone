@@ -11,12 +11,7 @@ class Listing < ActiveRecord::Base
    
   def cost_per_sqft
     cost_per_sqft = ""
-
-    if price && sqft 
-      cost_per_sqft = price / sqft 
-    end
-
-    cost_per_sqft
+    cost_per_sqft = price / sqft if price && sqft 
   end
 
   def find_comment_score(input)
@@ -25,9 +20,7 @@ class Listing < ActiveRecord::Base
     if !comment 
       score = ""
     else score = comment.score 
-    end
-
-    score    
+    end    
   end
 
   def neighborhood_score
@@ -48,16 +41,11 @@ class Listing < ActiveRecord::Base
 
   def rent_estimate
     rent_est = read_attribute(:rent_estimate)
-
-    if rent_est == nil
-      rent_est = (0.008 * price).round(2) 
-    end
-
-    rent_est
+    rent_est = (0.008 * price).round(2) if rent_est == nil
   end
 
 
-  #below are methods for investing data, which will be secondary features once its all built
+  #the methods below have not been completed yet
 
   def loan_stats(user)
     

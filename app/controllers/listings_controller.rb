@@ -7,7 +7,6 @@ class ListingsController < ApplicationController
   def home 
 
     if current_user #redirects to index if there is a current user, and sets defaults
-
       unless CharacteristicsUser.where(user_id: current_user.id).exists? 
         Characteristic.all.each do |char|
           CharacteristicsUser.create(
@@ -18,12 +17,7 @@ class ListingsController < ApplicationController
             )
         end
 
-        default_loan_type = 15
-        default_percent_down = 20.00
-
-        current_user.update(
-          loan_type: default_loan_type,
-          percent_down_pmt: default_percent_down)
+        current_user.update(loan_type: 15, percent_down_pmt: 20.00)
       end
 
       redirect_to "/listings"
