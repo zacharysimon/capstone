@@ -1,7 +1,7 @@
 class ListingsController < ApplicationController
-  # include ZillowApi
   include HTTParty 
   include ListingsHelper
+  # include ZillowApi
 
   
   def home 
@@ -33,9 +33,7 @@ class ListingsController < ApplicationController
   end
 
   def create
-
-    input_walk_score = walk_score_api(params[:latitude], params[:longitude])
-    monthly_pmt = zillow_mortgage_helper(params["price"], params["user_id"])
+    api_data = get_api_data(params)
 
     @listing = Listing.new(
       user_id: params["user_id"],
@@ -52,8 +50,8 @@ class ListingsController < ApplicationController
       sqft: params["sqft"],
       hoa_assessment: params["hoa_assessment"],
       tax_assessment: params["tax_assessment"],
-      walk_score: input_walk_score[:walk_score],
-      monthly_debt_service: monthly_pmt[:monthly_pmt],
+      walk_score: api_data[:walk_score],
+      monthly_debt_service: api_data[:monthly_pmt],
       url: params["url"]
       )
 
@@ -66,7 +64,6 @@ class ListingsController < ApplicationController
 
 
   def show
-    #need to refactor so someone not signed in doesn't get an error heres
     @listing = Listing.find_by(id: params[:id]) if current_user
   end
 
