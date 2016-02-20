@@ -13,8 +13,7 @@ class Api::V1::ListingsController < ApplicationController
   end
 
   def zillow_search
-    hash_result = { results: zillow_search_helper(params) }
-    render json: hash_result
+    render json: zillow_search_helper(params)
   end
 
   def update
