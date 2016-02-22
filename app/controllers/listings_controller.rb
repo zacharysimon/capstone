@@ -1,20 +1,10 @@
 class ListingsController < ApplicationController
-  include ApiData
-
+  include ApiData 
   
   def home 
-
     if current_user #redirects to index if there is a current user, and sets defaults
       unless CharacteristicsUser.where(user_id: current_user.id).exists? 
-        Characteristic.all.each do |char|
-          CharacteristicsUser.create(
-            user_id: current_user.id,
-            characteristic_id: char.id,
-            order: char.default_order,
-            visible: char.default_visible
-            )
-        end
-
+        CharacteristicsUser.create_new_dashboard(current_user)
         current_user.update(loan_type: 15, percent_down_pmt: 20.00)
       end
 

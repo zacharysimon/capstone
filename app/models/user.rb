@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :characteristics_users
   has_many :characteristics, through: :characteristics_users
 
+
   def get_dashboard
     Characteristic.dashboard_headings(self)
   end
@@ -16,5 +17,5 @@ class User < ActiveRecord::Base
   def get_whole_dashboard
     Characteristic.all_dashboard_headings(self)
   end
-  
+
 end

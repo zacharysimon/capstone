@@ -6,7 +6,6 @@ class Api::V1::ListingsController < ApplicationController
       @dashboard = current_user.get_dashboard
       @listings = current_user.listings.all
     end
-
   end
 
   def dashboard
