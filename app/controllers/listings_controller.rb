@@ -1,7 +1,5 @@
 class ListingsController < ApplicationController
-  include HTTParty 
-  include ListingsHelper
-  # include ZillowApi
+  include ApiData
 
   
   def home 

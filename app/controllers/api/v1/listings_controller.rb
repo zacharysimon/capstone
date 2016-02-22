@@ -1,11 +1,12 @@
 class Api::V1::ListingsController < ApplicationController
-  include ListingsHelper
+  include ApiData
 
   def index
     if current_user
       @dashboard = current_user.get_dashboard
       @listings = current_user.listings.all
     end
+
   end
 
   def dashboard
