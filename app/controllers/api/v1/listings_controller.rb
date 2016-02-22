@@ -13,7 +13,7 @@ class Api::V1::ListingsController < ApplicationController
   end
 
   def zillow_search
-    render json: zillow_search_helper(params)
+    render json: zillow_search_helper(params) #gets data from helper method
   end
 
   def update

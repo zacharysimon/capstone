@@ -11,12 +11,7 @@ module ListingsHelper
   end
 
   def walk_score_api(params)
-    lat = params[:latitude]
-    long = params[:longitude]
-
-    response = HTTParty.get("http://api.walkscore.com/score?format=xml&lat=#{lat}&lon=#{long}&wsapikey=#{$WS_APIKEY}")
-
-    response.parsed_response["result"]["walkscore"]
+    response = HTTParty.get("http://api.walkscore.com/score?format=xml&lat=#{params[:latitude]}&lon=#{params[:longitude]}&wsapikey=#{$WS_APIKEY}").parsed_response["result"]["walkscore"]
   end
 
   def zillow_search_helper(params)
@@ -36,26 +31,27 @@ module ListingsHelper
   end
 
   def zillow_mortgage_helper(params)
+    url = "http://www.zillow.com/webservice/GetMonthlyPayments.htm?zws-id=X1-ZWz19ytk7im2ob_728x4&price=#{listing_price(params)}&down=#{user_percent_down_pmt}"
 
-    input_price = params["price"]
-    user = User.find_by(id: params["user_id"])
-
-    if input_price != nil
-      url = "http://www.zillow.com/webservice/GetMonthlyPayments.htm?zws-id=X1-ZWz19ytk7im2ob_728x4&price=#{input_price}&down=#{user.percent_down_pmt.to_i}"
-    else     # if there is no price, defaults to $100,000
-      url = "http://www.zillow.com/webservice/GetMonthlyPayments.htm?zws-id=X1-ZWz19ytk7im2ob_728x4&price=100000&down=20"
-    end
-
-    mortgage_data = HTTParty.get(url).parsed_response["paymentsSummary"]["response"]["payment"][user_loan_preference(params)]["monthlyPrincipalAndInterest"]
+    mortgage_data = HTTParty.get(url).parsed_response["paymentsSummary"]["response"]["payment"][user_loan_preference]["monthlyPrincipalAndInterest"]
   end
 
-  def user_loan_preference(params)
+  def listing_price(params)
+    price = params["price"] ||= 100000
+  end
+
+  def user_loan_preference
     user = User.find_by(id: params["user_id"])
 
     if user.loan_type == 30
       return 0
     else return 1 
     end
+  end
+
+  def user_percent_down_pmt
+    user = User.find_by(id: params["user_id"])
+    user.percent_down_pmt.to_i
   end
 
 
