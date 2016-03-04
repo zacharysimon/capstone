@@ -1,10 +1,9 @@
 /* global angular */
 
-
 (function() {
   "use strict";
 
-  angular.module("app").controller("listingCtrl", function($scope, $http) {
+  angular.module("app").controller("listingCtrl", ['$scope', '$http', function($scope, $http) {
     
     $scope.setUser = function(id) {
       $scope.currentUserId = id;
@@ -175,5 +174,5 @@
     };
 
     window.$scope = $scope;
-  });
+  }]);
 })();
