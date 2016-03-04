@@ -50,5 +50,8 @@ test:
 production:
   <<: *default
   database: capstone_production
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
   username: capstone
   password: <%= ENV['CAPSTONE_DATABASE_PASSWORD'] %>

@@ -50,7 +50,6 @@ class ListingsController < ApplicationController
 
   end
 
-
   def show
     @listing = Listing.find_by(id: params[:id]) if current_user
   end
