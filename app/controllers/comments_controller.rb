@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
       listing_id: params[:input_listing_id],
       comment: params[:input_comment],
       #error here before with comment_type vs. type database attribute
-      type: params[:input_comment_type],
+      category: params[:input_comment_type],
       score: params[:input_score]
       )
     if comment.save

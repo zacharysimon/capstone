@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160117163520) do
+ActiveRecord::Schema.define(version: 20160328180619) do
 
   create_table "characteristics", force: :cascade do |t|
     t.text    "attribute_column_name", limit: 65535
@@ -28,13 +28,13 @@ ActiveRecord::Schema.define(version: 20160117163520) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.integer  "user_id",      limit: 4
-    t.integer  "listing_id",   limit: 4
-    t.integer  "score",        limit: 4
-    t.text     "comment",      limit: 65535
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.string   "comment_type", limit: 255
+    t.integer  "user_id",    limit: 4
+    t.integer  "listing_id", limit: 4
+    t.integer  "score",      limit: 4
+    t.text     "comment",    limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "category",   limit: 255
   end
 
   create_table "listings", force: :cascade do |t|
